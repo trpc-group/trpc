@@ -79,7 +79,7 @@ message RequestProtocol {
   uint32    content_encoding            		= 12;
   
   // 二进制数据
-  repeated  bytes data                  		= 99;
+  bytes data                  		            = 99;
 }
 
 // 响应协议头
@@ -127,7 +127,7 @@ message ResponseProtocol {
   uint32    content_encoding            		= 11;
   
   // 二进制数据
-  repeated  bytes data                  		= 99;
+  bytes data                  		            = 99;
 }
 ```
 
