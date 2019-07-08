@@ -6,7 +6,7 @@ package trpc;
 enum TrpcMagic {
   TRPC_DEFAULT_MAGIC_VALUE = 0x00;
   
-  //走马灯数
+  //走马灯数，trpc协议默认使用这个魔数
   TRPC_MAGIC_VALUE = 0x22E09;
 }
 
