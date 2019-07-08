@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package trpc;
+
+// 框架协议头里的魔数
+enum TrpcMagic {
+  TRPC_DEFAULT_MAGIC_VALUE = 0x00;
+  
+  //走马灯数
+  TRPC_MAGIC_VALUE = 0x22E09;
+}
+
+// trpc协议中的调用类型
+enum TrpcInvokeType {
+  // 正常调用，包括同步、异步
+  TRPC_NORMAL_INVOKE = 0x00;
+  
+  // 单项调用
+  TRPC_ONEWAY_INVOKE = 0x01;
+  
+  // 流式调用
+  TRPC_STREAM_INVOKE = 0x02;
+  
+}
+
+// trpc协议中的消息透传支持的类型
+enum TrpcMessageType {
+  // 染色
+  TRPC_DYEING_MESSAGE = 0x00;
+  
+  // 调用链
+  TRPC_TRACE_MESSAGE = 0x01;
+  
+  // 多环境
+  TRPC_MULTI_ENV_MESSAGE = 0x02;
+  
+  // 灰度
+  TRPC_GRID_MESSAGE = 0x04;
+  
+  // set名
+  TRPC_SETNAME_MESSAGE = 0x08;
+  
+  // 流结束
+  TRPC_STREAM_END_MESSAGE = 0x10;
+  
+}
+
+// trpc协议中data内容的编码类型
+// 默认使用pb
+enum TrpcContentEncodeType {
+  // pb
+  TRPC_PROTO_ENCODE = 0;
+  
+  // jce
+  TRPC_JCE_ENCODE = 1;
+  
+  // json
+  TRPC_JSON_ENCODE = 2;
+  
+}
+
+// trpc协议中data内容的压缩类型
+// 默认使用不使用
+enum TrpcCompressType {
+  // 不使用压缩
+  TRPC_DEFAULT_COMPRESS = 0;
+  
+  // 使用gzip
+  TRPC_GZIP_COMPRESS = 1;
+  
+  // 使用snappy
+  TRPC_SNAPPY_COMPRESS = 2;
+  
+}
