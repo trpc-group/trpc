@@ -60,9 +60,9 @@ enum TrpcContentEncodeType {
 }
 
 // trpc协议中data内容的压缩类型
-// 默认使用不使用
+// 默认使用不压缩
 enum TrpcCompressType {
-  // 不使用压缩
+  // 默认不使用压缩
   TRPC_DEFAULT_COMPRESS = 0;
   
   // 使用gzip
