@@ -6,6 +6,7 @@ import "trpc_proto_const.proto";
 import "trpc_proto_retcode.proto";
 
 option java_package = "com.tencent.trpc.codec.trpc.proto";
+option java_outer_classname = "TRPCProtocol";
 // 请求协议头
 message RequestProtocol {
   // 协议版本
