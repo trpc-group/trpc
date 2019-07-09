@@ -2,14 +2,17 @@ syntax = "proto3";
 
 package trpc;
 
+import "trpc_proto_const.proto";
+import "trpc_proto_retcode.proto";
+
 // 请求协议头
 message RequestProtocol {
   // 协议版本
-  uint32      version                   = 1; 
+  TrpcProtoVersion version              = 1; 
   
   // 请求的调用类型
   // 比如: 普通调用，单向调用，流式调用
-  uint32      call_type                 = 2;
+  TrpcCallType call_type                = 2;
   
   // 流id
   uint32    stream_id                   = 3;
@@ -42,11 +45,11 @@ message RequestProtocol {
   
   // 请求数据的数据类型
   // 比如: proto/jce/json, 默认proto
-  uint32    content_type                = 11;
+  TrpcContentEncodeType  content_type   = 11;
   
   // 请求数据使用的压缩方式
   // 比如: gzip/snappy/..., 默认不使用
-  uint32    content_encoding            = 12;
+  TrpcCompressType    content_encoding  = 12;
   
   // 二进制数据
   bytes data                            = 99;
@@ -55,11 +58,11 @@ message RequestProtocol {
 // 响应协议头
 message ResponseProtocol {
   // 协议版本
-  uint32      version                   = 1; 
+  TrpcProtoVersion  version             = 1; 
   
   // 请求的调用类型
   // 比如: 普通调用，单向调用，流式调用
-  uint32      call_type                 = 2;
+  TrpcCallType      call_type           = 2;
   
   // 流式id
   uint32    stream_id                   = 3;
@@ -68,7 +71,7 @@ message ResponseProtocol {
   uint32    request_id                  = 4;
   
   // 请求在框架层的错误返回码
-  int32    ret                          = 5;
+  TrpcRetCode    ret                    = 5;
   
   // 接口的错误返回码
   // 建议业务在使用时，标识成功和失败，0代表成功，其它代表失败
@@ -90,11 +93,11 @@ message ResponseProtocol {
   
   // 响应数据的编码类型
   // 比如: proto/jce/json, 默认proto
-  uint32    content_type                = 10;
+  TrpcContentEncodeType    content_type = 10;
   
   // 响应数据使用的压缩方式
   // 比如: gzip/snappy/..., 默认不使用
-  uint32    content_encoding            = 11;
+  TrpcCompressType    content_encoding  = 11;
   
   // 二进制数据
   bytes data                            = 99;
