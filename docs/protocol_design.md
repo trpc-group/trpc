@@ -25,7 +25,7 @@ RPC调用方式			|远程调用像调本地接口一样
 
 3.新统一RPC协议的具体设计
 
-框架的RPC协议的字段参见：[trpc_proto.proto](proto/trpc_proto.proto)。
+框架的RPC协议的字段参见：[trpc_proto.proto](../proto/trpc_proto.proto)。
 
 协议定义保留支持流式的能力，pb使用v3版本。
 
