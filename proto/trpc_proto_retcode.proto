@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package trpc;
 
+option go_package = "git.code.oa.com/trpc-go/trpc";
+
 // 框架层接口调用的返回码定义
 enum TrpcRetCode {
   // 调用成功

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package trpc;
 
+option go_package = "git.code.oa.com/trpc-go/trpc";
+
 // 框架协议头里的魔数
 enum TrpcMagic {
   TRPC_DEFAULT_MAGIC_VALUE = 0x00;
