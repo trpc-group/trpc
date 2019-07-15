@@ -1,0 +1,249 @@
+syntax = "proto3";
+
+package trpc;
+
+option go_package = "git.code.oa.com/trpc-go/trpc";
+option java_package = "com.tencent.trpc.codec.trpc.proto";
+option java_outer_classname = "TRPCProtocol";
+
+// 框架协议头里的魔数
+enum TrpcMagic {
+  TRPC_DEFAULT_MAGIC_VALUE = 0x00;
+  
+  //走马灯数，trpc协议默认使用这个魔数
+  TRPC_MAGIC_VALUE = 0x22E09;
+}
+
+// trpc协议版本
+enum TrpcProtoVersion {
+  // 默认版本
+  TRPC_PROTO_V1  = 0;
+  
+}
+
+// trpc协议中的调用类型
+enum TrpcCallType {
+  // 正常调用，包括同步、异步
+  TRPC_NORMAL_CALL = 0;
+  
+  // 单项调用
+  TRPC_ONEWAY_CALL = 1;
+  
+  // 流式调用
+  TRPC_STREAM_CALL = 2;
+  
+}
+
+// trpc协议中的消息透传支持的类型
+enum TrpcMessageType {
+  // 染色
+  TRPC_DYEING_MESSAGE = 0x00;
+  
+  // 调用链
+  TRPC_TRACE_MESSAGE = 0x01;
+  
+  // 多环境
+  TRPC_MULTI_ENV_MESSAGE = 0x02;
+  
+  // 灰度
+  TRPC_GRID_MESSAGE = 0x04;
+  
+  // set名
+  TRPC_SETNAME_MESSAGE = 0x08;
+  
+  // 流结束
+  TRPC_STREAM_END_MESSAGE = 0x10;
+  
+}
+
+// trpc协议中data内容的编码类型
+// 默认使用pb
+enum TrpcContentEncodeType {
+  // pb
+  TRPC_PROTO_ENCODE = 0;
+  
+  // jce
+  TRPC_JCE_ENCODE = 1;
+  
+  // json
+  TRPC_JSON_ENCODE = 2;
+  
+}
+
+// trpc协议中data内容的压缩类型
+// 默认使用不压缩
+enum TrpcCompressType {
+  // 默认不使用压缩
+  TRPC_DEFAULT_COMPRESS = 0;
+  
+  // 使用gzip
+  TRPC_GZIP_COMPRESS = 1;
+  
+  // 使用snappy
+  TRPC_SNAPPY_COMPRESS = 2;
+  
+}
+
+// 框架层接口调用的返回码定义
+enum TrpcRetCode {
+  // 调用成功
+  TRPC_INVOKE_SUCCESS = 0;
+  
+  // 服务端的错误码
+  // 主要分几类:
+  // 1.协议，2.service或者func路由，3.队列超时或过载
+  // 其它带补充
+  
+  // 协议错误码
+  // 服务端解码错误
+  TRPC_SERVER_DECODE_ERR = 1;
+  // 服务端编码错误
+  TRPC_SERVER_ENCODE_ERR = 2;
+  
+  // service或者func路由错误码
+  // 服务端没有调用相应的service实现
+  TRPC_SERVER_NOSERVICE_ERR = 11;
+  // 服务端没有调用相应的接口实现
+  TRPC_SERVER_NOFUNC_ERR = 12;
+  
+  // 队列超时或过载错误码
+  // 请求在服务端超时
+  TRPC_SERVER_TIMEOUT_ERR = 21;
+  // 请求在服务端过载
+  TRPC_SERVER_OVERLOAD_ERR = 22;
+  
+  // 客户端的错误码
+  // 主要分几类:
+  // 1.超时，2.网络，3.协议，4.路由
+  // 其它带补充
+  
+  // 超时错误码
+  // 请求在客户端调用超时
+  TRPC_CLIENT_INVOKE_TIMEOUT_ERR = 101;
+  
+  // 网络相关错误码
+  // 客户端连接错误
+  TRPC_CLIENT_CONNECT_ERR = 111;
+  
+  // 协议相关错误码
+  // 客户端编码错误
+  TRPC_CLIENT_ENCODE_ERR = 121;
+  // 客户端解码错误
+  TRPC_CLIENT_DECODE_ERR = 122;
+  
+  // 路由相关错误码
+  // 客户端选ip路由错误
+  TRPC_CLIENT_ROUTER_ERR = 131;
+  
+  // 未明确的错误
+  TRPC_INVOKE_UNKNOWN_ERR = 999;
+}
+
+// 请求协议头
+message RequestProtocol {
+  // 协议版本
+  // 具体值与TrpcProtoVersion对应
+  uint32    version                     = 1; 
+  
+  // 请求的调用类型
+  // 比如: 普通调用，单向调用，流式调用
+  // 具体值与TrpcCallType对应
+  uint32    call_type                   = 2;
+  
+  // 流id
+  uint32    stream_id                   = 3;
+  
+  // 请求唯一id
+  uint32    request_id                  = 4;
+  
+  // 请求的超时时间，单位ms
+  uint32    timeout                     = 5;
+  
+  // 主调服务的名称
+  string    caller                      = 6;
+  
+  // 被调服务的路由名称
+  // 规范格式，trpc.应用名.服务名.pb的service名
+  string    callee                      = 7;
+  
+  // 调用服务的接口名
+  // 规范格式: /package.Service名称/接口名
+  string    func                        = 8;
+  
+  // 框架信息透传的消息类型
+  // 比如调用链、染色key、灰度、鉴权、流结束、多环境、set名称等的标识
+  // 具体值与TrpcMessageType对应
+  uint32    message_type                = 9;
+  
+  // 框架透传的信息key-value对，目前分两部分
+  // 1是框架层要透传的信息，key的名字要以trpc_开头
+  // 2是业务层要透传的信息，业务可以自行设置
+  map<string, string> trans_info        = 10;
+  
+  // 请求数据的数据类型
+  // 比如: proto/jce/json, 默认proto
+  // 具体值与TrpcContentEncodeType对应
+  uint32    content_type                = 11;
+  
+  // 请求数据使用的压缩方式
+  // 比如: gzip/snappy/..., 默认不使用
+  // 具体值与TrpcCompressType对应
+  uint32    content_encoding            = 12;
+  
+  // 二进制数据
+  bytes data                            = 99;
+}
+
+// 响应协议头
+message ResponseProtocol {
+  // 协议版本
+  // 具体值与TrpcProtoVersion对应
+  uint32    version                     = 1; 
+  
+  // 请求的调用类型
+  // 比如: 普通调用，单向调用，流式调用
+  // 具体值与TrpcCallType对应
+  uint32    call_type                   = 2;
+  
+  // 流式id
+  uint32    stream_id                   = 3;
+  
+  // 请求唯一id
+  uint32    request_id                  = 4;
+  
+  // 请求在框架层的错误返回码
+  // 具体值与TrpcRetCode对应
+  int32     ret                         = 5;
+  
+  // 接口的错误返回码
+  // 建议业务在使用时，标识成功和失败，0代表成功，其它代表失败
+  int32     func_ret                    = 6;
+  
+  // 调用结果信息描述
+  // 失败的时候用
+  string    error_msg                   = 7;
+  
+  // 框架信息透传的消息类型
+  // 比如调用链、染色key、灰度、鉴权、流结束、多环境、set名称等的标识
+  // 具体值与TrpcMessageType对应
+  uint32    message_type                = 8;
+  
+  // 框架透传回来的信息key-value对，
+  // 目前分两部分
+  // 1是框架层透传回来的信息，key的名字要以trpc_开头
+  // 2是业务层透传回来的信息，业务可以自行设置
+  map<string, string> trans_info        = 9;
+  
+  // 响应数据的编码类型
+  // 比如: proto/jce/json, 默认proto
+  // 具体值与TrpcContentEncodeType对应
+  uint32    content_type                = 10;
+  
+  // 响应数据使用的压缩方式
+  // 比如: gzip/snappy/..., 默认不使用
+  // 具体值与TrpcCompressType对应
+  uint32    content_encoding            = 11;
+  
+  // 二进制数据
+  bytes data                            = 99;
+}
