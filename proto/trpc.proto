@@ -160,15 +160,15 @@ message RequestProtocol {
   uint32    timeout                     = 5;
   
   // 主调服务的名称
-  string    caller                      = 6;
+  bytes     caller                      = 6;
   
   // 被调服务的路由名称
   // 规范格式，trpc.应用名.服务名.pb的service名
-  string    callee                      = 7;
+  bytes     callee                      = 7;
   
   // 调用服务的接口名
   // 规范格式: /package.Service名称/接口名
-  string    func                        = 8;
+  bytes     func                        = 8;
   
   // 框架信息透传的消息类型
   // 比如调用链、染色key、灰度、鉴权、流结束、多环境、set名称等的标识
@@ -178,7 +178,7 @@ message RequestProtocol {
   // 框架透传的信息key-value对，目前分两部分
   // 1是框架层要透传的信息，key的名字要以trpc_开头
   // 2是业务层要透传的信息，业务可以自行设置
-  map<string, string> trans_info        = 10;
+  map<string, bytes> trans_info        = 10;
   
   // 请求数据的数据类型
   // 比如: proto/jce/json, 默认proto
@@ -221,7 +221,7 @@ message ResponseProtocol {
   
   // 调用结果信息描述
   // 失败的时候用
-  string    error_msg                   = 7;
+  bytes    error_msg                   = 7;
   
   // 框架信息透传的消息类型
   // 比如调用链、染色key、灰度、鉴权、流结束、多环境、set名称等的标识
@@ -232,7 +232,7 @@ message ResponseProtocol {
   // 目前分两部分
   // 1是框架层透传回来的信息，key的名字要以trpc_开头
   // 2是业务层透传回来的信息，业务可以自行设置
-  map<string, string> trans_info        = 9;
+  map<string, bytes> trans_info        = 9;
   
   // 响应数据的编码类型
   // 比如: proto/jce/json, 默认proto
