@@ -25,8 +25,6 @@ RPC调用方式			|远程调用像调本地接口一样
 
 3.新统一RPC协议的具体设计
 
-框架的RPC协议的字段参见：[trpc.proto](../proto/trpc.proto)。
+![image.png](/uploads/C260989EF084459183D08A935702670F/image.png)
 
-协议定义保留支持流式的能力，pb使用v3版本。
-
-另外，请求和响应协议的前面加两个固定长度的头：魔数和长度。魔数在前，长度在后，其中魔数字段占4个字节，估计为0x22E09（其10进制数142857称走马灯数），长度字段占4个字节，内容为消息结构体RequestProtocol或者ResponseProtocol序列化后的大小。
+协议头的字段使用pb v3版本定义，参见：[trpc.proto](../proto/trpc.proto)。
