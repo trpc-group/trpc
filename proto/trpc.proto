@@ -45,8 +45,8 @@ enum TrpcProtoVersion {
 
 // trpc协议中的调用类型
 enum TrpcCallType {
-  // 正常调用，包括同步、异步
-  TRPC_NORMAL_CALL = 0;
+  // 一应一答调用，包括同步、异步
+  TRPC_UNARY_CALL = 0;
   
   // 单项调用
   TRPC_ONEWAY_CALL = 1;
