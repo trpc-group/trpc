@@ -58,7 +58,7 @@ enum TrpcCallType {
   TRPC_SERVER_STREAM_CALL = 3;
   
   // 客户端和服务端流式请求和回应
-  TRPC_BIDI_STREAM_CALL = 3;
+  TRPC_BIDI_STREAM_CALL = 4;
   
 }
 
