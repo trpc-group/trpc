@@ -51,8 +51,14 @@ enum TrpcCallType {
   // 单项调用
   TRPC_ONEWAY_CALL = 1;
   
-  // 流式调用
-  TRPC_STREAM_CALL = 2;
+  // 客户端流式请求调用
+  TRPC_CLIENT_STREAM_CALL = 2;
+  
+  // 服务端流式回应
+  TRPC_SERVER_STREAM_CALL = 3;
+  
+  // 客户端和服务端流式请求和回应
+  TRPC_BIDI_STREAM_CALL = 3;
   
 }
 
