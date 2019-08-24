@@ -8,7 +8,8 @@ option java_outer_classname = "TRPCProtocol";
 
 // 框架协议头里的魔数
 enum TrpcMagic {
-  //TRPC_DEFAULT_MAGIC_VALUE = 0x00;
+    //trpc 不用这个值，为了提供给pb工具生成代码
+  TRPC_DEFAULT_NONE = 0x00;
   
   //trpc协议默认使用这个魔数
   TRPC_MAGIC_VALUE = 0x930;
@@ -64,6 +65,10 @@ enum TrpcCallType {
 
 // trpc协议中的消息透传支持的类型
 enum TrpcMessageType {
+    
+  //trpc 不用这个值，为了提供给pb工具生成代码
+  TRPC_DEFAULT		  = 0x00;
+    
   // 染色
   TRPC_DYEING_MESSAGE = 0x01;
   
