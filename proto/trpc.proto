@@ -10,8 +10,30 @@ option java_outer_classname = "TRPCProtocol";
 enum TrpcMagic {
   TRPC_DEFAULT_MAGIC_VALUE = 0x00;
   
-  //走马灯数，trpc协议默认使用这个魔数
-  TRPC_MAGIC_VALUE = 0x22E09;
+  //trpc协议默认使用这个魔数
+  TRPC_MAGIC_VALUE = 0x930;
+}
+
+// trpc协议的二进制数据帧类型
+// 目前支持两种类型的二进制数据帧：
+// 1. 一应一答模式的二进制数据帧类型
+// 2. 流式模式的二进制数据帧类型
+enum TrpcDataFrameType {
+  //trpc一应一答模式的二进制数据帧类型
+  TRPC_UNARY_FRAME = 0x01;
+  
+  //trpc流式模式的二进制数据帧类型
+  TRPC_STREAM_FRAME = 0x02;
+}
+
+// trpc协议的二进制数据帧的状态
+// 目前支持流式模式的二进制数据帧结束状态
+enum TrpcDataFrameState {
+  //不包括任何状态
+  TRPC_NO_STATE = 0x00;
+  
+  //trpc流式模式下的结束状态
+  TRPC_STREAM_FINISH = 0x01;
 }
 
 // trpc协议版本
