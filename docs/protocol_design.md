@@ -25,6 +25,6 @@ RPC调用方式			|远程调用像调本地接口一样
 
 3.新统一RPC协议的具体设计
 
-![image.png](/uploads/C260989EF084459183D08A935702670F/image.png)
+![image.png](/uploads/4C8A111DDAE541A98FC023E445F56794/image.png)
 
 协议头的字段使用pb v3版本定义，参见：[trpc.proto](../proto/trpc.proto)。
