@@ -169,6 +169,9 @@ enum TrpcRetCode {
   TRPC_INVOKE_UNKNOWN_ERR = 999;
 }
 
+// trans_info已使用的框架key，注意不要重复：
+// "trpc-dyeing-key"：染色key
+
 // 请求协议头
 message RequestProtocol {
   // 协议版本
@@ -204,7 +207,7 @@ message RequestProtocol {
   uint32    message_type                = 8;
   
   // 框架透传的信息key-value对，目前分两部分
-  // 1是框架层要透传的信息，key的名字要以trpc_开头
+  // 1是框架层要透传的信息，key的名字要以trpc-开头
   // 2是业务层要透传的信息，业务可以自行设置
   map<string, bytes> trans_info         = 9;
   
@@ -252,7 +255,7 @@ message ResponseProtocol {
   
   // 框架透传回来的信息key-value对，
   // 目前分两部分
-  // 1是框架层透传回来的信息，key的名字要以trpc_开头
+  // 1是框架层透传回来的信息，key的名字要以trpc-开头
   // 2是业务层透传回来的信息，业务可以自行设置
   map<string, bytes> trans_info         = 8;
   
