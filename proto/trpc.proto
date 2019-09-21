@@ -3,7 +3,7 @@ syntax = "proto3";
 package trpc;
 
 option go_package = "git.code.oa.com/trpc-go/trpc";
-option java_package = "com.tencent.trpc.rpc.standard.proto";
+option java_package = "com.tencent.trpc.proto.standard.common";
 option java_outer_classname = "TRPCProtocol";
 
 // 框架协议头里的魔数
