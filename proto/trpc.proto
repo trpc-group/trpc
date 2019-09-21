@@ -88,6 +88,7 @@ enum TrpcMessageType {
 
 // trpc协议中data内容的编码类型
 // 默认使用pb
+// 目前约定0-127范围的取值为框架规范的序列化方式,框架使用
 enum TrpcContentEncodeType {
   // pb
   TRPC_PROTO_ENCODE = 0;
