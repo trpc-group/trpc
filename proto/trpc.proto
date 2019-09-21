@@ -98,6 +98,11 @@ enum TrpcContentEncodeType {
   // json
   TRPC_JSON_ENCODE = 2;
   
+  // flatbuffer
+  TRPC_FLATBUFFER_ENCODE = 3;
+
+  // 不序列化
+  TRPC_NOOP_ENCODE = 4;
 }
 
 // trpc协议中data内容的压缩类型
@@ -142,6 +147,9 @@ enum TrpcRetCode {
   // 请求在服务端过载
   TRPC_SERVER_OVERLOAD_ERR = 22;
   
+  // 服务端系统错误
+  TRPC_SERVER_SYSTEM_ERR = 31;
+  
   // 客户端的错误码
   // 主要分几类:
   // 1.超时，2.网络，3.协议，4.路由
@@ -164,6 +172,9 @@ enum TrpcRetCode {
   // 路由相关错误码
   // 客户端选ip路由错误
   TRPC_CLIENT_ROUTER_ERR = 131;
+  
+  // 客户端网络错误
+  TRPC_CLINET_NETWORK_ERR = 141;
   
   // 未明确的错误
   TRPC_INVOKE_UNKNOWN_ERR = 999;
