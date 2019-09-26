@@ -202,11 +202,12 @@ message RequestProtocol {
   uint32    timeout                     = 4;
   
   // 主调服务的名称
+  // trpc协议下的规范格式: trpc.应用名.服务名.pb的service名, 4段
   bytes     caller                      = 5;
   
   // 被调服务的路由名称
-  // 规范格式，trpc.应用名.服务名.pb的service名[.接口名]
-  // 接口可选
+  // trpc协议下的规范格式，trpc.应用名.服务名.pb的service名[.接口名]
+  // 前4段是必须有，接口可选。
   bytes     callee                      = 6;
   
   // 调用服务的接口名
