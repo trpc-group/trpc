@@ -151,6 +151,12 @@ enum TrpcRetCode {
   // 服务端系统错误
   TRPC_SERVER_SYSTEM_ERR = 31;
   
+  // 服务端鉴权失败错误
+  TRPC_SERVER_AUTH_ERR = 41;
+  
+  // 服务端请求参数自动校验失败错误
+  TRPC_SERVER_VALIDATE_ERR = 51;
+  
   // 客户端的错误码
   // 主要分几类:
   // 1.超时，2.网络，3.协议，4.路由
@@ -176,6 +182,9 @@ enum TrpcRetCode {
   
   // 客户端网络错误
   TRPC_CLINET_NETWORK_ERR = 141;
+  
+  // 客户端响应参数自动校验失败错误
+  TRPC_CLIENT_VALIDATE_ERR = 151;
   
   // 未明确的错误
   TRPC_INVOKE_UNKNOWN_ERR = 999;
