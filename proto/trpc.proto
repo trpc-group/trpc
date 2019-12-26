@@ -124,7 +124,7 @@ enum TrpcRetCode {
   // 服务端的错误码
   // 主要分几类:
   // 1.协议，2.service或者func路由，3.队列超时或过载
-  // 其它带补充
+  // 其它待补充
   
   // 协议错误码
   // 服务端解码错误
@@ -156,7 +156,7 @@ enum TrpcRetCode {
   // 客户端的错误码
   // 主要分几类:
   // 1.超时，2.网络，3.协议，4.路由
-  // 其它带补充
+  // 其它待补充
   
   // 超时错误码
   // 请求在客户端调用超时
@@ -177,7 +177,7 @@ enum TrpcRetCode {
   TRPC_CLIENT_ROUTER_ERR = 131;
   
   // 客户端网络错误
-  TRPC_CLINET_NETWORK_ERR = 141;
+  TRPC_CLIENT_NETWORK_ERR = 141;
   
   // 客户端响应参数自动校验失败错误
   TRPC_CLIENT_VALIDATE_ERR = 151;
