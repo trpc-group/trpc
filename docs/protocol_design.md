@@ -24,6 +24,16 @@ RPC 是远端过程调用的简称，其协议通常包含传输协议和编码�
 
 3.新统一 RPC 协议的具体设计
 
+支持流式前的trpc协议设计:
+
 ![image.png](/uploads/4C8A111DDAE541A98FC023E445F56794/image.png)
+
+支持流式后的trpc协议设计：
+
+![image.png](/uploads/915A9EB1921F4A9D99AAC18816B255FA/image.png)
+
+主要改动:
+1. 固定帧头中的1字节数据协议状态，含义修改，变成流式帧类型
+2. 流式id从2字节变成4字节，保留字段由原来的4字节变成2字节
 
 协议头的字段使用 pb v3 版本定义，参见：[trpc.proto](../proto/trpc.proto)。
