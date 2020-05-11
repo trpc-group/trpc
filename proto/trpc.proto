@@ -27,6 +27,7 @@ enum TrpcDataFrameType {
   TRPC_STREAM_FRAME = 0x01;
 }
 
+// 此类型后续不再使用，改成下面的TrpcStreamFrameType
 // trpc协议的二进制数据帧的状态
 // 目前支持流式模式的二进制数据帧结束状态
 enum TrpcDataFrameState {
@@ -35,6 +36,48 @@ enum TrpcDataFrameState {
   
   // trpc流式模式下的结束状态
   TRPC_STREAM_FINISH = 0x01;
+}
+
+// trpc协议流式的二进制数据帧类型
+// 目前流式帧类型分5种：INIT/DATA/FEEDBACK/CLOSE/RESET，其中CLOSE帧不带业务数据
+// INIT帧：FIXHEADER + 包头(请求头/响应头)
+// DATA帧：FIXHEADER + body
+// FEEDBACK帧：FIXHEADER + 流控帧头
+// CLOSE帧：FIXHEADER + 请求头（响应头）
+// RESET：FIXHEADER + RESET帧头
+enum TrpcStreamFrameType {
+  // 流式INIT帧类型
+  TRPC_STREAM_FRAME_INIT = 0x00;
+  
+  // 流式DATA帧类型
+  TRPC_STREAM_FRAME_DATA = 0x01;
+
+  // 流式FEEDBACK帧类型
+  TRPC_STREAM_FRAME_FEEDBACK = 0x02;
+
+  // 流式CLOSE帧类型
+  TRPC_STREAM_FRAME_CLOSE = 0x03;
+
+  // 流式RESET帧类型
+  TRPC_STREAM_FRAME_RESET = 0x04;
+}
+
+// trpc流式的流控帧头消息定义
+message TrpcStreamFeedBack {        
+  // 本端生产值，传给对端
+  uint64 produce = 1;
+  
+  // 本端消费值，传给对端
+  uint64 consume = 2;
+}
+
+// trpc流式的RESET帧头消息定义
+message TrpcStreamReset {        
+  // reset信息码
+  int32 ret = 1;
+  
+  // reset信息描述
+  bytes msg = 2;
 }
 
 // trpc协议版本
@@ -184,9 +227,71 @@ enum TrpcRetCode {
   
   // 上游主动断开连接，提前取消请求错误
   TRPC_CLIENT_CANCELED_ERR = 161;
+
+  // 服务端流式的错误码
+  // 主要分几类:
+  // 1.网络，2.编解码，3.写，4.读
+  // 其它待补充
+
+  // 服务端流式网络错误, 详细错误码需要在实现过程中再梳理
+  TRPC_STREAM_SERVER_NETWORK_ERR = 201;
+
+  // 服务端流式传输错误, 详细错误码需要在实现过程中再梳理
+  // 比如：流式空闲超时错误，流消息过大等
+  TRPC_STREAM_SERVER_IDLE_TIMEOUT_ERR = 211;
+  TRPC_STREAM_SERVER_MSG_EXCEED_LIMIT_ERR = 212;
+
+  // 服务端流式编码错误
+  TRPC_STREAM_SERVER_ENCODE_ERR = 221;
+  // 客户端流式编解码错误
+  TRPC_STREAM_SERVER_DECODE_ERR = 222;
+
+  // 服务端流式写错误, 详细错误码需要在实现过程中再梳理
+  TRPC_STREAM_SERVER_WRITE_END = 231;
+  TRPC_STREAM_SERVER_WRITE_OVERFLOW_ERR = 232;
+  TRPC_STREAM_SERVER_WRITE_CLOSE_ERR = 233;
+  TRPC_STREAM_SERVER_WRITE_TIMEOUT_ERR = 234;
+
+  // 服务端流式读错误, 详细错误码需要在实现过程中再梳理
+  TRPC_STREAM_SERVER_READ_END = 251;
+  TRPC_STREAM_SERVER_READ_CLOSE_ERR = 252;
+  TRPC_STREAM_SERVER_READ_EMPTY_ERR = 253;
+  TRPC_STREAM_SERVER_READ_TIMEOUT_ERR = 254;
+
+  // 客户端流式的错误码
+  // 主要分几类:
+  // 1.网络，2.编解码，3.写，4.读
+  // 其它待补充
+
+  // 客户端流式网络错误, 详细错误码需要在实现过程中再梳理
+  TRPC_STREAM_CLIENT_NETWORK_ERR = 301;
+
+  // 客户端流式传输错误, 详细错误码需要在实现过程中再梳理
+  // 比如：流式空闲超时错误，流消息过大等
+  TRPC_STREAM_CLIENT_IDLE_TIMEOUT_ERR = 311;
+  TRPC_STREAM_CLIENT_MSG_EXCEED_LIMIT_ERR = 312;
+
+  // 客户端流式编码错误
+  TRPC_STREAM_CLIENT_ENCODE_ERR = 321;
+  // 客户端流式编解码错误
+  TRPC_STREAM_CLIENT_DECODE_ERR = 322;
+
+  // 客户端流式写错误, 详细错误码需要在实现过程中再梳理
+  TRPC_STREAM_CLIENT_WRITE_END = 331;
+  TRPC_STREAM_CLIENT_WRITE_OVERFLOW_ERR = 332;
+  TRPC_STREAM_CLIENT_WRITE_CLOSE_ERR = 333;
+  TRPC_STREAM_CLIENT_WRITE_TIMEOUT_ERR = 334;
+
+  // 客户端流式读错误, 详细错误码需要在实现过程中再梳理
+  TRPC_STREAM_CLIENT_READ_END = 351;
+  TRPC_STREAM_CLIENT_READ_CLOSE_ERR = 352;
+  TRPC_STREAM_CLIENT_READ_EMPTY_ERR = 353;
+  TRPC_STREAM_CLIENT_READ_TIMEOUT_ERR = 354;
   
   // 未明确的错误
   TRPC_INVOKE_UNKNOWN_ERR = 999;
+  // 未明确的错误
+  TRPC_STREAM_UNKNOWN_ERR = 1000;
 }
 
 // trans_info已使用的框架key，注意不要重复：
