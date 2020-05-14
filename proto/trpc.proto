@@ -144,10 +144,10 @@ message TrpcStreamCloseMeta {
   // 关闭的类型，关闭一端，还是全部关闭
   int32 close_type = 1;
 
-  // reset信息码
+  // close返回码
   int32 ret = 2;
   
-  // reset信息描述
+  // close信息描述
   bytes msg = 3;
 
   // 框架信息透传的消息类型
@@ -175,14 +175,14 @@ enum TrpcCallType {
   // 单向调用
   TRPC_ONEWAY_CALL = 1;
   
-  // 客户端流式请求调用
-  TRPC_CLIENT_STREAM_CALL = 2;
+  // 客户端流式请求调用, 删除
+  //TRPC_CLIENT_STREAM_CALL = 2;
   
-  // 服务端流式回应
-  TRPC_SERVER_STREAM_CALL = 3;
+  // 服务端流式回应，删除
+  //TRPC_SERVER_STREAM_CALL = 3;
   
-  // 客户端和服务端流式请求和回应
-  TRPC_BIDI_STREAM_CALL = 4;
+  // 客户端和服务端流式请求和回应，删除
+  //TRPC_BIDI_STREAM_CALL = 4;
 }
 
 // trpc协议中的消息透传支持的类型
@@ -318,9 +318,8 @@ enum TrpcRetCode {
   TRPC_STREAM_SERVER_NETWORK_ERR = 201;
 
   // 服务端流式传输错误, 详细错误码需要在实现过程中再梳理
-  // 比如：流式空闲超时错误，流消息过大等
-  TRPC_STREAM_SERVER_IDLE_TIMEOUT_ERR = 211;
-  TRPC_STREAM_SERVER_MSG_EXCEED_LIMIT_ERR = 212;
+  // 比如：流消息过大等
+  TRPC_STREAM_SERVER_MSG_EXCEED_LIMIT_ERR = 211;
 
   // 服务端流式编码错误
   TRPC_STREAM_SERVER_ENCODE_ERR = 221;
@@ -348,9 +347,8 @@ enum TrpcRetCode {
   TRPC_STREAM_CLIENT_NETWORK_ERR = 301;
 
   // 客户端流式传输错误, 详细错误码需要在实现过程中再梳理
-  // 比如：流式空闲超时错误，流消息过大等
-  TRPC_STREAM_CLIENT_IDLE_TIMEOUT_ERR = 311;
-  TRPC_STREAM_CLIENT_MSG_EXCEED_LIMIT_ERR = 312;
+  // 比如：流消息过大等
+  TRPC_STREAM_CLIENT_MSG_EXCEED_LIMIT_ERR = 311;
 
   // 客户端流式编码错误
   TRPC_STREAM_CLIENT_ENCODE_ERR = 321;
