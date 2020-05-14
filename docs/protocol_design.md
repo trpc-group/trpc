@@ -30,7 +30,7 @@ RPC 是远端过程调用的简称，其协议通常包含传输协议和编码�
 
 支持流式后的trpc协议设计：
 
-![image.png](/uploads/A855B7D9FDBF45D59E51A992EB752BC7/image.png)
+![image.png](/uploads/CC1AC8AB1EBA49BEA7FC28843600AA10/image.png)
 
 
 主要改动:
