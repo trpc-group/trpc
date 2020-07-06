@@ -68,7 +68,7 @@ message TrpcStreamInitMeta {
   TrpcStreamInitRequestMeta request_meta = 1;
 
   // init响应元信息
-  TrpcStreamInitResponsetMeta response_meta = 2;
+  TrpcStreamInitResponseMeta response_meta = 2;
 
   // 本端stream buff的大小
   uint32 recv_buff_size = 3;
@@ -111,7 +111,7 @@ message TrpcStreamInitRequestMeta {
 };
 
 // trpc流式init头的响应元信息
-message TrpcStreamInitResponsetMeta {
+message TrpcStreamInitResponseMeta {
   // 请求在框架层的错误返回码
   // 具体值与TrpcRetCode对应
   int32 ret = 1;
