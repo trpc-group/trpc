@@ -107,6 +107,7 @@ message TrpcStreamInitRequestMeta {
   // 框架透传的信息key-value对，目前分两部分
   // 1是框架层要透传的信息，key的名字要以trpc-开头
   // 2是业务层要透传的信息，业务可以自行设置
+  // 注意: trans_info中的key-value对会全链路透传，业务请谨慎使用！
   map<string, bytes> trans_info = 5;
 };
 
