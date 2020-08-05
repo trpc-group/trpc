@@ -239,6 +239,9 @@ enum TrpcCompressType {
   
   // 使用snappy
   TRPC_SNAPPY_COMPRESS = 2;
+  
+  // 使用zlib
+  TRPC_ZLIB_COMPRESS = 3;
 }
 
 // 框架层接口调用的返回码定义
