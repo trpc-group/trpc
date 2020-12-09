@@ -146,6 +146,7 @@ message TrpcStreamCloseMeta {
   int32 close_type = 1;
 
   // close返回码
+  // 代表框架层的错误
   int32 ret = 2;
   
   // close信息描述
@@ -160,6 +161,11 @@ message TrpcStreamCloseMeta {
   // 1是框架层要透传的信息，key的名字要以trpc-开头
   // 2是业务层要透传的信息，业务可以自行设置
   map<string, bytes> trans_info = 5;
+
+  // 接口的错误返回码
+  // 建议业务在使用时，标识成功和失败，0代表成功，其它代表失败
+  int32 func_ret = 6;
+
 }
 
 // trpc协议版本
