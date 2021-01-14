@@ -70,8 +70,8 @@ message TrpcStreamInitMeta {
   // init响应元信息
   TrpcStreamInitResponseMeta response_meta = 2;
 
-  // 本端stream buff的大小
-  uint32 recv_buff_size = 3;
+  // 由接收端告知发送端初始的发送窗口大小
+  uint32 init_window_size = 3;
   
   // 请求数据的序列化类型
   // 比如: proto/jce/json, 默认proto
@@ -124,11 +124,8 @@ message TrpcStreamInitResponseMeta {
 
 // trpc流式的流控帧头元信息定义
 message TrpcStreamFeedBackMeta {        
-  // 本端生产值，传给对端
-  uint64 produce = 1;
-  
-  // 本端消费值，传给对端
-  uint64 consume = 2;
+  // 增加的窗口大小
+  uint32 window_size_increment = 1;
 }
 
 // trpc流式关闭类型
