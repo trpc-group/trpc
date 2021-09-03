@@ -277,6 +277,9 @@ enum TrpcRetCode {
   TRPC_SERVER_TIMEOUT_ERR = 21;
   // 请求在服务端过载
   TRPC_SERVER_OVERLOAD_ERR = 22;
+  // 请求在服务端被限流
+  TRPC_SERVER_LIMITED_ERR = 23;
+
 
   // 服务端系统错误
   TRPC_SERVER_SYSTEM_ERR = 31;
@@ -305,6 +308,10 @@ enum TrpcRetCode {
   TRPC_CLIENT_ENCODE_ERR = 121;
   // 客户端解码错误
   TRPC_CLIENT_DECODE_ERR = 122;
+
+  // 请求被客户端限流
+  TRPC_CLIENT_LIMITED_ERR = 123;
+
 
   // 路由相关错误码
   // 客户端选ip路由错误
