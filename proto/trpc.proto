@@ -272,14 +272,17 @@ enum TrpcRetCode {
   // 服务端没有调用相应的接口实现
   TRPC_SERVER_NOFUNC_ERR = 12;
 
-  // 队列超时或过载错误码
+  // 超时/过载/限流错误码
   // 请求在服务端超时
   TRPC_SERVER_TIMEOUT_ERR = 21;
-  // 请求在服务端过载
+  // 请求在服务端被过载保护而丢弃请求
+  // 主要用在框架内部实现的过载保护插件上
   TRPC_SERVER_OVERLOAD_ERR = 22;
   // 请求在服务端被限流
+  // 主要用在外部服务治理系统的插件或者业务自定义的限流插件上，比如: 北极星限流
   TRPC_SERVER_LIMITED_ERR = 23;
-
+  // 请求在服务端因全链路超时时间而超时
+  TRPC_SERVER_FULL_LINK_TIMEOUT_ERR = 24;
 
   // 服务端系统错误
   TRPC_SERVER_SYSTEM_ERR = 31;
@@ -298,6 +301,9 @@ enum TrpcRetCode {
   // 超时错误码
   // 请求在客户端调用超时
   TRPC_CLIENT_INVOKE_TIMEOUT_ERR = 101;
+  // 请求在客户端因全链路超时时间而超时
+  TRPC_CLIENT_FULL_LINK_TIMEOUT_ERR = 102;
+  
 
   // 网络相关错误码
   // 客户端连接错误
@@ -309,9 +315,13 @@ enum TrpcRetCode {
   // 客户端解码错误
   TRPC_CLIENT_DECODE_ERR = 122;
 
-  // 请求被客户端限流
+  // 过载保护/限流相关错误码
+  // 请求在客户端被限流
+  // 主要用在外部服务治理系统的插件或者业务自定义的限流插件上，比如: 北极星限流
   TRPC_CLIENT_LIMITED_ERR = 123;
-
+  // 请求在客户端被过载保护而丢弃请求
+  // 主要用在框架内部实现的过载保护插件上
+  TRPC_CLIENT_OVERLOAD_ERR = 124;
 
   // 路由相关错误码
   // 客户端选ip路由错误
