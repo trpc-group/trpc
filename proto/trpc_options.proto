@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package trpc;
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.MethodOptions { 
+  string alias = 50001;
+}

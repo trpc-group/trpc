@@ -232,6 +232,9 @@ enum TrpcContentEncodeType {
 
   // xml
   TRPC_XML_ENCODE = 5;
+
+  // thrift
+  TRPC_THRIFT_ENCODE = 6;
 }
 
 // trpc协议中 data 内容的压缩类型
@@ -303,7 +306,6 @@ enum TrpcRetCode {
   TRPC_CLIENT_INVOKE_TIMEOUT_ERR = 101;
   // 请求在客户端因全链路超时时间而超时
   TRPC_CLIENT_FULL_LINK_TIMEOUT_ERR = 102;
-  
 
   // 网络相关错误码
   // 客户端连接错误
