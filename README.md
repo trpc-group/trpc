@@ -2,7 +2,8 @@ trpc 统一协议的设计和定义
 
 协议设计文档：[protocol_design.md](docs/protocol_design.md).
 
-协议/常量/返回码定义：[trpc.proto](proto/trpc.proto).
+协议/常量/返回码定义：[trpc.proto](trpc/proto/trpc.proto).
+拓展选项定义：[trpc_options.proto](trpc/proto/trpc_options.proto)
 
 协议中业务层在 `trans_info` 的 key 定义规范：
 
