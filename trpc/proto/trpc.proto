@@ -247,10 +247,19 @@ enum TrpcCompressType {
   TRPC_GZIP_COMPRESS = 1;
 
   // 使用snappy
+  //
+  // Deprecated: 建议使用 TRPC_SNAPPY_STREAM_COMPRESS/TRPC_SNAPPY_BLOCK_COMPRESS, 因为现在
+  // trpc-go 和 trpc-cpp 分别的使用的是 stream、block 模式，二者不兼容，跨语言调用会出错
   TRPC_SNAPPY_COMPRESS = 2;
 
   // 使用zlib
   TRPC_ZLIB_COMPRESS = 3;
+
+  // 使用 stream 模式的 snappy
+  TRPC_SNAPPY_STREAM_COMPRESS = 4;
+
+  // 使用 block 模式的 snappy
+  TRPC_SNAPPY_BLOCK_COMPRESS = 5;
 }
 
 // 框架层接口调用的返回码定义
