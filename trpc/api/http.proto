@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package trpc.api;
 
-option go_package = "git.code.oa.com/trpc-go/trpc/api/annotations";
+option go_package = "git.woa.com/trpc/trpc-protocol/pbgo/trpc/api";
 
 message HttpRule {
     // Selects a method to which this rule applies.
