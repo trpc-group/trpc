@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package trpc;
 
-option go_package = "git.woa.com/trpc/trpc-protocol/pbgo/trpc/proto";
+option go_package = "git.woa.com/trpc/trpc-protocol/pb/go/trpc";
 option java_package = "com.tencent.trpc.proto.standard.common";
 option java_outer_classname = "TRPCProtocol";
 
