@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.2.1](https://git.woa.com/trpc/trpc-protocol/tree/v0.2.1)(2022-08-12)
+### Features And Improvements
+- snappy新增两种的压缩类型(block/stream)，以应对不同语言snappy的sdk实现差异
+- 增加http的扩展定义HttpRule
+
 ## [0.2.0](https://git.woa.com/trpc/trpc-protocol/tree/v0.2.0)(2022-05-09)
 ### Features And Improvements
 - 定义扩展option（trpc/proto/trpc_options.proto）
