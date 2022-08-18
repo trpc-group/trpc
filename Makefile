@@ -11,10 +11,10 @@ all:
 		./trpc/proto/trpc.proto \
 		./trpc/proto/swagger.proto \
 		./trpc/proto/trpc_options.proto \
-		./trpc/proto/validate.ext.proto 
+		./trpc/proto/validate.proto 
 	mv $(DIR)/git.woa.com/trpc/trpc-protocol/pb/go/trpc/* $(DIR)/trpc
 	rm -rf $(DIR)/git.woa.com
-	cd ./$(DIR)/trpc && go mod init git.woa.com/trpc/trpc-protocol/$(DIR) && go mod tidy && cd - 
+	cd ./$(DIR)/trpc && go mod init git.woa.com/trpc/trpc-protocol/$(DIR)/trpc && go mod tidy && cd - 
 
 clean:
 	rm -rf $(DIR)

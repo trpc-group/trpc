@@ -5,6 +5,7 @@ import "google/protobuf/descriptor.proto";
 package trpc;
 
 option go_package = "git.woa.com/trpc/trpc-protocol/pb/go/trpc";
+option java_package = "com.tencent.trpc.proto.standard.common";
 
 extend google.protobuf.MethodOptions {
     string alias = 50001;

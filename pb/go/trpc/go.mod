@@ -1,4 +1,4 @@
-module git.woa.com/trpc/trpc-protocol/pb/go
+module git.woa.com/trpc/trpc-protocol/pb/go/trpc
 
 go 1.18
 
