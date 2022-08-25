@@ -3,7 +3,7 @@ import "google/protobuf/descriptor.proto";
 package trpc;
 
 option go_package = "git.woa.com/trpc/trpc-protocol/pb/go/trpc";
-option java_package = "com.tencent.trpc.proto.standard.common";
+option java_package = "com.tencent.trpc.protobuf.ext";
 
 extend google.protobuf.MethodOptions {
     SwaggerRule swagger = 50101;

@@ -6,6 +6,7 @@ import "trpc/api/http.proto";
 import "google/protobuf/descriptor.proto";
 
 option go_package = "git.woa.com/trpc/trpc-protocol/pb/go/trpc/api";
+option java_package = "com.tencent.trpc.protobuf.ext";
 
 extend google.protobuf.MethodOptions {
     HttpRule http = 50201;
