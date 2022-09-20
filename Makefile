@@ -8,13 +8,18 @@ all:
 		./trpc/api/http.proto 
 	protoc -I/usr/local/include -I.\
 		--go_out=./$(DIR) \
-		./trpc/proto/trpc.proto \
-		./trpc/proto/swagger.proto \
+		./trpc/trpc.proto \
 		./trpc/proto/trpc_options.proto \
-		./trpc/proto/validate.proto 
+		./trpc/swagger/swagger.proto \
+		./trpc/validate/validate.proto 
 	mv $(DIR)/git.woa.com/trpc/trpc-protocol/pb/go/trpc/* $(DIR)/trpc
 	rm -rf $(DIR)/git.woa.com
 	cd ./$(DIR)/trpc && go mod init git.woa.com/trpc/trpc-protocol/$(DIR)/trpc && go mod tidy && cd - 
+
+.PHONY: test clean
+
+test:
+	./testbuild.sh
 
 clean:
 	rm -rf $(DIR)

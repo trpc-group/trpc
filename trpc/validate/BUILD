@@ -1,11 +1,13 @@
 package(default_visibility = ["//visibility:public"])
 
 proto_library(
-    name = "trpc_options_proto",
+    name = "validate_proto",
     srcs = [
-        "trpc_options.proto",
+        "validate.proto",
     ],
     deps = [
         "@com_google_protobuf//:descriptor_proto",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:timestamp_proto",
     ],
 )
