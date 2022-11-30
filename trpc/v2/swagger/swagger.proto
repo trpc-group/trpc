@@ -1,8 +1,8 @@
 syntax = "proto3";
 import "google/protobuf/descriptor.proto";
-package trpcv2;
+package trpc.v2;
 
-option go_package = "git.woa.com/trpc/trpc-protocol/pb/go/trpcv2/swagger";
+option go_package = "git.woa.com/trpc/trpc-protocol/pb/go/trpc/v2/swagger";
 option java_package = "com.tencent.trpc.protobuf.ext";
 
 extend google.protobuf.MethodOptions {

@@ -6,7 +6,7 @@ proto_library(
         "annotations.proto",
     ],
     deps = [
-        "//trpcv2/api:http_proto",
+        "//trpc/v2/api:http_proto",
         "@com_google_protobuf//:descriptor_proto",
     ],
 )

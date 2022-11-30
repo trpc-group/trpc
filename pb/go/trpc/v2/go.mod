@@ -1,6 +1,6 @@
-module git.woa.com/trpc/trpc-protocol/pb/go/trpcv2
+module git.woa.com/trpc/trpc-protocol/pb/go/trpc/v2
 
-go 1.19
+go 1.16
 
 require (
 	github.com/golang/protobuf v1.5.2

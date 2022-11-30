@@ -1,5 +1,10 @@
 # Change Log
 
+## [pb/go/trpc/v2.0.0](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/v2.0.0)(2022-11-30)
+
+- 修整 trpc 目录下各个 proto 文件的路径名以规范化
+- 提供 trpc/v2 子目录以供 trpc-go trpc.tech v2 使用
+
 ## [0.2.1](https://git.woa.com/trpc/trpc-protocol/tree/v0.2.1)(2022-08-12)
 ### Features And Improvements
 - snappy新增两种的压缩类型(block/stream)，以应对不同语言snappy的sdk实现差异
