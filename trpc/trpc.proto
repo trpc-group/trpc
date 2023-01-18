@@ -463,6 +463,9 @@ message RequestProtocol {
   // 比如: gzip/snappy/..., 默认不使用
   // 具体值与TrpcCompressType对应
   uint32    content_encoding            = 11;
+
+  // attachment大小
+  uint32    attachment_size             = 12;
 }
 
 // 响应协议头
@@ -511,4 +514,7 @@ message ResponseProtocol {
   // 比如: gzip/snappy/..., 默认不使用
   // 具体值与TrpcCompressType对应
   uint32    content_encoding            = 10;
+
+  // attachment大小
+  uint32    attachment_size             = 12;
 }
