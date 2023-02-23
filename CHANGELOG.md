@@ -1,5 +1,15 @@
 # Change Log
 
+## [0.3.0](https://git.woa.com/trpc/trpc-protocol/tree/v0.3.0)(2023-02-23)
+### Features And Improvements
+- 修整trpc目录下各个proto文件的路径名以规范化
+- 提供trpc/v2子目录以供 trpc-go trpc.tech v2 使用
+- 增加java package选项
+- 拓展trpc协议支持attachment
+
+### Thanks to our Contributors
+bochenchen(陈维翔);wineguo(郭琪周)
+
 ## [pb/go/trpc/v2.0.0](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/v2.0.0)(2022-11-30)
 
 - 修整 trpc 目录下各个 proto 文件的路径名以规范化
