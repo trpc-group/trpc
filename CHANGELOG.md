@@ -1,5 +1,9 @@
 # Change Log
 
+## [pb/go/trpc/v0.1.1](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/v0.1.1)(2023-05-09)
+### Features
+- 新增客户端读取 Frame 错误码 TRPC_CLIENT_READ_FRAME_ERR(171) 
+
 ## [pb/go/trpc/v0.1.0](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/v0.1.0)(2023-04-19)
 ### Features
 - 新增 trpc 协议

@@ -1,12 +1,13 @@
 DIR=pb/go
+INCLUDE_GOOGLE_PB_PATH=/usr/local/include
 all: 
 	rm -rf $(DIR)
 	mkdir -p $(DIR)
-	protoc -I/usr/local/include -I.\
+	protoc -I$(INCLUDE_GOOGLE_PB_PATH) -I.\
 		--go_out=paths=source_relative:./$(DIR) \
 		./trpc/api/annotations.proto \
 		./trpc/api/http.proto 
-	protoc -I/usr/local/include -I.\
+	protoc -I$(INCLUDE_GOOGLE_PB_PATH) -I.\
 		--go_out=./$(DIR) \
 		./trpc/trpc.proto \
 		./trpc/proto/trpc_options.proto \
@@ -17,11 +18,11 @@ all:
 	cd ./$(DIR)/trpc && go mod init git.woa.com/trpc/trpc-protocol/$(DIR)/trpc && go mod tidy && cd - 
 
 	# trpc v2
-	protoc -I/usr/local/include -I.\
+	protoc -I$(INCLUDE_GOOGLE_PB_PATH) -I.\
 		--go_out=paths=source_relative:./$(DIR) \
 		./trpc/v2/api/annotations.proto \
 		./trpc/v2/api/http.proto 
-	protoc -I/usr/local/include -I.\
+	protoc -I$(INCLUDE_GOOGLE_PB_PATH) -I.\
 		--go_out=./$(DIR) \
 		./trpc/v2/trpc.proto \
 		./trpc/v2/proto/trpc_options.proto \

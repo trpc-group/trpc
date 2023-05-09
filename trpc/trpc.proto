@@ -347,6 +347,9 @@ enum TrpcRetCode {
   // 上游主动断开连接，提前取消请求错误
   TRPC_CLIENT_CANCELED_ERR = 161;
 
+  // 客户端读取 Frame 错误
+  TRPC_CLIENT_READ_FRAME_ERR = 171;
+
   // 服务端流式的错误码
   // 主要分几类:
   // 1.网络，2.编解码，3.写，4.读
