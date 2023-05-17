@@ -260,6 +260,12 @@ enum TrpcCompressType {
 
   // 使用 block 模式的 snappy
   TRPC_SNAPPY_BLOCK_COMPRESS = 5;
+
+  // 使用 frame 模式的 lz4
+  TRPC_LZ4_FRAME_COMPRESS = 6;
+
+  // 使用 block 模式的 lz4
+  TRPC_LZ4_BLOCK_COMPRESS = 7;
 }
 
 // 框架层接口调用的返回码定义
