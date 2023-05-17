@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.4.0](https://git.woa.com/trpc/trpc-protocol/tree/v0.4.0)(2023-05-17)
+### Features And Improvements
+- 拓展trpc协议支持lz4解压缩类型
+
+### Thanks to our Contributors
+seadonli(李晓东)
+
 ## [pb/go/trpc/v0.1.1](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/v0.1.1)(2023-05-09)
 ### Features
 - 新增客户端读取 Frame 错误码 TRPC_CLIENT_READ_FRAME_ERR(171) 
