@@ -1,6 +1,16 @@
-[TOC]
+# Overview
 
-# Capabilities and Demands
+This article mainly introduces the tRPC protocol.
+
+# Why design the tRPC protocol
+
+First of all, tRPC is a multi-language RPC framework that requires a unified transmission protocol for communication and some functional alignment during communication.
+
+Secondly, why tRPC does not choose the http/http2 protocol? The main reason here is performance problem.
+
+Finally, in addition to forward compatibility, tRPC also has strong scalability requirements in the communication protocol, and can expand the ability to support various business requirements.
+
+The following table shows the capabilities and requirements of tRPC for communication protocols.
 
 |  Capabilities |Demands   |
 | ------------ | ------------ |
@@ -16,11 +26,19 @@
 |  Passing Dyeing Information |  The protocol should provide the ability to pass dyeing information |
 |  Passing Custom Business Information	 |  The protocol should provide the ability to pass custom business information |
 
+In order to support these capabilities and requirements, the overall design of the tRPC protocol is as follows:
+
+Protocol header (custom design) + Protocol body (use protobuf by default, extensible)
+
 # Design And Implementation
 
 ## Protocol Design
 
+The figure below is the specific design of the tRPC protocol.
+
 ![ 'image.png'](/docs/images/trpc-protocol.png)
+
+The tRPC protocol supports two transmission methods: unary and stream.
 
 for unary RPC(one-request-one-response), the entire data packet = Fix Header（16 bytes）+ Unary Header + Unary Body.
 
@@ -29,6 +47,7 @@ for stream RPC, the entire data packet = Fix Header（16 bytes）+ Stream Frame(
 the complete protocol definition, please see [trpc.proto](/trpc/trpc.proto)
 
 ## Protocol Details
+
 ### Fixed Header
 - The first 2 bytes:
   The first two bytes of the protocol are magic numbers, indicating the start of the trpc frame, which is 0x930.
@@ -95,7 +114,7 @@ stream-id needs to be unique in a single connection
 
 After 16 bytes, for unary(one-response-one-response), it corresponds to the header of the protocol, which is divided into request header and response header.
 
-### Request Header
+#### Request Header
 
 ```protobuf
 // The request header for unary
@@ -156,7 +175,7 @@ message RequestProtocol {
 }
 ```
 
-### Response Header
+#### Response Header
 
 ```protobuf
 // The response header for unary
