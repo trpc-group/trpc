@@ -37,11 +37,11 @@ For example: tRPC connects to different naming service systems by defined unifie
 The design of the plugin factory can bring the following benefits:
 - For the framework side: the framework only defines standard interfaces, without any plugin implementation, and is completely decoupled from the specific platform;
 - For the platform side: You only need to implement the plugin according to the standard interface of the framework plugin, and integrate the capabilities of the platform into the framework;
-- For the user side: business development only needs to be used through configuration, which is transparent to users;
+- For the user side: developers only need to be used through configuration, which is transparent to users;
 
 ## Filter
 
-In order to make the tRPC framework more scalable and meet personalized business needs (such as metrics, log collection, tracing, parameter verification, request replay, fault injection, etc.), tRPC use java's aspect-oriented programming(AOP) idea to support filter.
+In order to make the tRPC framework more scalable and meet personalized developers needs (such as metrics, log collection, tracing, parameter verification, request replay, fault injection, etc.), tRPC use java's aspect-oriented programming(AOP) idea to support filter.
 
 The overall idea of filter implementation is to set up buried points in the framework's process of processing RPC requests, and then insert a series of filters into the buried points.
 
@@ -65,16 +65,16 @@ The overall architecture consists of two parts: "**Framework Core**" and "**Plug
 
 The core of the framework can be divided into three layers:
 
-- **Communication Layer**: responsible for data transmission and protocol encoding and decoding. the framework has built-in support for communication protocols such as tcp and udp. The transmission protocol uses the tRPC protocol based on protobuf to carry RPC calls. It also supports other transmission protocols through codec plugins;
+- **Communication Layer**: responsible for data transmission and protocol encoding and decoding. the framework has built-in support for communication protocols such as tcp and udp and uses the tRPC protocol based on protobuf to carry RPC messages. It also supports other transmission protocols through codec plugins;
 
 - **Service Governance Layer**: responsible for abstracting service governance functions into plugins and connecting them with service governance systems by calling plug-ins to realize service discovery, load balance, monitor, tracing, etc.
 
-- **Call Layer**: encapsulates services and service proxy entities, provides RPC call interfaces, and supports business calls between services using synchronous, asynchronous, one-way and streaming calls;
+- **Call Layer**: encapsulates services and service proxy entities, provides RPC call interfaces, and supports synchronous, asynchronous, one-way and streaming calls;
 
 In addition, the framework also provides an admin management interface, so that users or the operation platform can manage services by calling the admin interface. The management interface includes functions such as updating configurations, viewing versions, modifying log levels, viewing framework runtime information, etc. At the same time, the framework also supports user-defined management interfaces to meet business customization needs.
 
 Plugins are the bridge that connects the framework core and external service governance systems. They are roughly divided into the following plugin types according to their functions:
-- Codec: provides interfaces related to protocol encoding and decoding, allowing expansion of business protocols, serialization methods, data compression methods through plugins;
+- Codec: provides interfaces related to protocol encoding and decoding, allowing expansion of customized protocols, serialization methods, data compression methods through plugins;
 - Naming: provides service registration (registry), service discovery (selector), load balance, circuit breaker and other capability encapsulation, used to connect with various naming service systems;
 - Config: provides interfaces to read local configuration files, remote configuration center configurations, etc., allows plug-in extensions to support configuration files in different formats, different configuration centers, and supports reload and watch configuration updates;
 - Metrics: provides interfaces to report monitor data, supports common single-dimensional reporting, such as counter, gauge, etc., and also supports multi-dimensional reporting;
@@ -94,8 +94,8 @@ The above figure describes the steps that an RPC call must go through. Based on 
 
 ![rpc](/docs/images/layer.png)
 
-In this picture, we have added a new layer of filter layer. Its main purpose is to use the idea of ​​AOP to personalize the needs of the business (such as parameter verification, request replay, fault injection, etc.) and service governance (such as metrics, tracing, logging, authentication, etc.) that are inserted into the request/response processing process in a cross-cutting manner. This design enhances the framework's scalability.
+In this picture, we have added a new layer of filter layer. Its main purpose is to use the idea of ​​AOP to meet customized needs (such as parameter verification, log replay, fault injection, etc.) and service governance (such as metrics, tracing, logging, authentication, etc.) that are inserted into the request/response processing process in a cross-cutting manner. This design enhances the framework's scalability.
 
 At the same time, tRPC modularizes each layer and adopts plug-in implementation. The framework connects the entire process of RPC calls through the idea of interface-based programming. For some modules, the framework also adopts a more fine-grained module splitting. For example: the Selector module is subdivided into sub-modules such as service discovery, service routing, load balanc and etc., and the Codec layer is also subdivided into three sub-modules: encode/decode, serialization and compression.
 
-Through the above overall layered design, plug-in implementation of specific modules and fine-grained module splitting, the framework has strong scalability and openness. Businesses can flexibly replace plugins to achieve connecting with different systems, and can also implement personalized business capabilities.
+Through the above overall layered design, plug-in implementation of specific modules and fine-grained module splitting, the framework has strong scalability and openness. Businesses can flexibly replace plugins to achieve connecting with different systems, and can also implement personalized capabilities.
