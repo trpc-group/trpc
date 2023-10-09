@@ -1,3 +1,5 @@
+English | [中文](CONTRIBUTORS.zh_CN.md)
+
 # Contributor Guidelines
 
 Thank you for your interest and support for tRPC!

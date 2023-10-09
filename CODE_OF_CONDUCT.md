@@ -1,3 +1,5 @@
+English | [中文](CODE_OF_CONDUCT.zh_CN.md)
+
 # Community Code of Conduct
 
 Welcome to our open source project!

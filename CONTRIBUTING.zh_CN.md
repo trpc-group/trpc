@@ -1,3 +1,4 @@
+[English](CONTRIBUTING.md) | 中文
 
 # 如何贡献
 
