@@ -1,3 +1,5 @@
+English | [中文](README.zh_CN.md)
+
 # tRPC -  A multi-language, plug-in, high-performance rpc framework
 
 ## What is tRPC

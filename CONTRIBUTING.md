@@ -1,3 +1,5 @@
+English | [中文](CONTRIBUTING.zh_CN.md)
+
 # How to Contribute
 
 Thank you for your interest and support in tRPC!

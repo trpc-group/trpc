@@ -1,3 +1,5 @@
+[English](CONTRIBUTORS.md) | 中文
+
 # 贡献者管理说明文档
 
 感谢您对本开源项目的关注和支持！本文档将阐述贡献者在项目中的角色、职责以及如何从Contributor升级为Maintainer，以及Maintainer降级为Contributor的规则。我们希望通过这份文档，让每位贡献者都能清楚地了解自己的成长路径，并为项目的发展做出更大的贡献。

@@ -1,3 +1,5 @@
+[English](README.md) | 中文
+
 # tRPC -  多语言、插件化、高性能的rpc开发框架
 
 ## tRPC是什么
