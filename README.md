@@ -31,14 +31,13 @@ You can use it:
 
 ## To start using tRPC
 
-Per-language quickstart guides and tutorials can be found in the
-[tRPC website](https://trpc.group/docs/). Code examples are available in the examples directory.
+Per-language quickstart guides and tutorials can be found in the [tRPC website](https://trpc.group/docs/) . Code examples are available in the examples directory.
 
 - tRPC
-    -  [architecture_design](https://github.com/trpc-group/trpc/blob/main/docs/en/architecture_design.md)
-    -  [terminology](https://github.com/trpc-group/trpc/blob/main/docs/en/terminology.md)
-    -  [plugin_ecosystem](https://github.com/trpc-group/trpc/blob/main/docs/en/plugin_ecosystem.md)
-    -  [trpc_protocol](https://github.com/trpc-group/trpc/blob/main/docs/en/trpc_protocol_design.md)
+    - [architecture_design](https://github.com/trpc-group/trpc/blob/main/docs/en/architecture_design.md)
+    - [terminology](https://github.com/trpc-group/trpc/blob/main/docs/en/terminology.md)
+    - [plugin_ecosystem](https://github.com/trpc-group/trpc/blob/main/docs/en/plugin_ecosystem.md)
+    - [trpc_protocol](https://github.com/trpc-group/trpc/blob/main/docs/en/trpc_protocol_design.md)
 - tRPC-Cpp:
     - [quick_start](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/quick_start.md)
     - [basic_tutorial](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/basic_tutorial.md)
@@ -54,6 +53,4 @@ Per-language quickstart guides and tutorials can be found in the
 
 Contributions are welcome!
 
-Please read [How to contribute](https://github.com/trpc-group/trpc/blob/main/CONTRIBUTORS.md)  which will guide you through
-the entire workflow of how to build the source code, how to run the tests, and
-how to contribute changes to the tRPC codebase.
+Please read [How to contribute](https://github.com/trpc-group/trpc/blob/main/CONTRIBUTORS.md) which will guide you through the entire workflow of how to build the source code, how to run the tests, and how to contribute changes to the tRPC codebase.
