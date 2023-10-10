@@ -34,10 +34,10 @@ tRPC是基于插件化理念设计的一款支持多语言、高性能的rpc开�
 可以在 [tRPC 官网](https://trpc.group/docs/) 找到tRPC每个语言的快速入门、基础教程等学习资料，也可以到tRPC各个语言的仓库查看详细的用户指南文档和代码示例。
 
 - tRPC
-    -  [架构设计](https://github.com/trpc-group/trpc/blob/main/docs/en/architecture_design.md)
-    -  [术语介绍](https://github.com/trpc-group/trpc/blob/main/docs/en/terminology.md)
-    -  [插件生态](https://github.com/trpc-group/trpc/blob/main/docs/en/plugin_ecosystem.md)
-    -  [trpc协议](https://github.com/trpc-group/trpc/blob/main/docs/en/trpc_protocol_design.md)
+    -  [架构设计](https://github.com/trpc-group/trpc/blob/main/docs/zh/architecture_design.md)
+    -  [术语介绍](https://github.com/trpc-group/trpc/blob/main/docs/zh/terminology.md)
+    -  [插件生态](https://github.com/trpc-group/trpc/blob/main/docs/zh/plugin_ecosystem.md)
+    -  [trpc协议](https://github.com/trpc-group/trpc/blob/main/docs/zh/trpc_protocol_design.md)
 - tRPC-Cpp:
     - [quick-start](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/quick_start.md)
     - [basic—tutorial](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/basic_tutorial.md)
@@ -53,4 +53,4 @@ tRPC是基于插件化理念设计的一款支持多语言、高性能的rpc开�
 
 非常欢迎大家给tRPC做贡献!
 
-建议您在为tRPC贡献之前, 先阅读一下 [如何贡献](https://github.com/trpc-group/trpc/blob/main/CONTRIBUTORS_zh.md), 它会指导你了解贡献代码的整个流程, 比如: 如何提pr/如何构建代码/如何运行单元测试等;
+建议您在为tRPC贡献之前, 先阅读一下 [如何贡献](https://github.com/trpc-group/trpc/blob/main/CONTRIBUTORS_zh.md) , 它会指导你了解贡献代码的整个流程, 比如: 如何提pr/如何构建代码/如何运行单元测试等;
