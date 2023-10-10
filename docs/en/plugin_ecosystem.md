@@ -1,6 +1,6 @@
 # Overview
 
-This article mainly introduces the current plugin ecology of tRPC.
+This article introduces the plugin ecosystem of tRPC.
 
 # Maturity classification
 
@@ -13,11 +13,11 @@ In terms of maturity, tRPC plugins are currently divided into the following 4 le
 | tested   | It has been tested and has not been used in business yet. |
 | archived | Archived, no longer maintained, and not recommended for use |
 
-# Plugin ecology in each language
+# Plugin ecosystem in each language
 
-The plug-in types of tRPC mainly include codec, filter, naming, config, metrics, tracing, logging, telemetry, etc.
+The plugin types of tRPC mainly include codec, filter, naming, config, metrics, tracing, logging, telemetry, etc.
 
-## tRPC-Cpp plugin ecology 
+## tRPC-Cpp plugin ecosystem 
 
 | Type  |   Plugin   |  Maturity  |  Doc |
 | -------- | -------- | :------: | :---------------------------------------------------------------------------------: |
@@ -38,7 +38,7 @@ The plug-in types of tRPC mainly include codec, filter, naming, config, metrics,
 | logging  | CLS |  stable  | [link](https://github.com/trpc-group/cpp-logging-cls/blob/main/README_zh.md) |
 | telemetry  | OpenTelemetry |  stable  | [link](https://github.com/trpc-group/cpp-telemetry-opentelemetry/blob/main/README_zh.md) |
 
-## tRPC-Go plugin ecology
+## tRPC-Go plugin ecosystem
 
 | Type  |   Plugin   |  Maturity  |  Doc |
 | -------- | -------- | :------: | :---------------------------------------------------------------------------------: |

@@ -1,6 +1,6 @@
 # Overview
 
-This article mainly introduces the background of tRPC, plug-in design, and overall architecture.
+This article introduces the background of tRPC, pluggable design, and overall architecture.
 
 # Background
 
@@ -10,11 +10,11 @@ At the same time, with the development of cloud native technology, businesses ar
 
 The above situation also exists within Tencent, and because of its large scale and diverse business types, it is more difficult to solve and must be solved. tRPC was born in this context.
 
-# Plug-in Design
+# Pluggable Design
 
-It must not only be interconnected with the existing technology system, but also adapt to cloud native technology and develop rapidly. This requires that the development framework must be open and extensible. In order to achieve this goal, tRPC adopts plug-in design ideas in architectural design.
+It must not only be interconnected with the existing technology system, but also adapt to cloud native technology and develop rapidly. This requires that the development framework must be open and extensible. In order to achieve this goal, tRPC adopts pluggable design ideas in architectural design.
 
-The tRPC plug-in design ideas are as follows:
+The tRPC pluggable design ideas are as follows:
 
 First, tRPC layers and modularizes the entire framework, and abstracts the core functional modules into independent plugins. The framework is then responsible for the concatenation and assembly of these independent plugins to achieve the features that the framework wants to support.
 
@@ -24,7 +24,7 @@ In terms of specific implementation, the following key technologies are used:
 
 ## Plugin Factory
 
-The overall implementation idea of the plug-in factory is that the framework only defines the standard interface of the plugin and provides registration capabilities without specific implementation. When interoperating with external services or connecting with a certain service governance system, you only need to develop the corresponding specific plugins.
+The overall implementation idea of the plugin factory is that the framework only defines the standard interface of the plugin and provides registration capabilities without specific implementation. When interoperating with external services or connecting with a certain service governance system, you only need to develop the corresponding specific plugins.
 
 For example: tRPC supports multiple protocols by defined a unified Codec. Different protocols only need to be implemented according to the Codec interface.
 
@@ -51,9 +51,9 @@ The filter workflow is as follows:
 
 The ultimate goal of filter is to decouple business logic from the framework and allow them to develop cohesively. It can dynamically add or replace personalized functions to business programs without modifying the framework code.
 
-# Plug-in Archtecture
+# Pluggable Archtecture
 
-With the above key technical support for plug-in, let’s take a look at how the tRPC plug-in architecture is designed.
+With the above key technical supporting, let’s take a look at how the tRPC pluggable architecture is designed.
 
 ## Overall Architectural Design
 
@@ -61,13 +61,13 @@ The overall architecture design of tRPC is as follows:
 
 ![architecture_design](/docs/images/architecture.png)
 
-The overall architecture consists of two parts: "**Framework Core**" and "**Plugin**". The dotted line box is tRPC, the red solid line box in the middle is the core of the framework, and the blue box is the plug-in part.
+The overall architecture consists of two parts: "**Framework Core**" and "**Plugin**". The dotted line box is tRPC, the red solid line box in the middle is the core of the framework, and the blue box is the plugin part.
 
 The core of the framework can be divided into three layers:
 
 - **Communication Layer**: responsible for data transmission and protocol encoding and decoding. the framework has built-in support for communication protocols such as tcp and udp and uses the tRPC protocol based on protobuf to carry RPC messages. It also supports other transmission protocols through codec plugins;
 
-- **Service Governance Layer**: responsible for abstracting service governance functions into plugins and connecting them with service governance systems by calling plug-ins to realize service discovery, load balance, monitor, tracing, etc.
+- **Service Governance Layer**: responsible for abstracting service governance functions into plugins and connecting them with service governance systems by calling plugins to realize service discovery, load balance, monitor, tracing, etc.
 
 - **Call Layer**: encapsulates services and service proxy entities, provides RPC call interfaces, and supports synchronous, asynchronous, one-way and streaming calls;
 
@@ -76,10 +76,10 @@ In addition, the framework also provides an admin management interface, so that 
 Plugins are the bridge that connects the framework core and external service governance systems. They are roughly divided into the following plugin types according to their functions:
 - Codec: provides interfaces related to protocol encoding and decoding, allowing expansion of customized protocols, serialization methods, data compression methods through plugins;
 - Naming: provides service registration (registry), service discovery (selector), load balance, circuit breaker and other capability encapsulation, used to connect with various naming service systems;
-- Config: provides interfaces to read local configuration files, remote configuration center configurations, etc., allows plug-in extensions to support configuration files in different formats, different configuration centers, and supports reload and watch configuration updates;
+- Config: provides interfaces to read local configuration files, remote configuration center configurations, etc., allows plugin extensions to support configuration files in different formats, different configuration centers, and supports reload and watch configuration updates;
 - Metrics: provides interfaces to report monitor data, supports common single-dimensional reporting, such as counter, gauge, etc., and also supports multi-dimensional reporting;
-- Logging: Provides a general log collection interface, allowing the log implementation to be extended through plug-ins and output to remote locations;
-- Tracing: Provides distributed tracing capabilities, allowing reporting to the call chain system through plug-ins;
+- Logging: Provides a general log collection interface, allowing the log implementation to be extended through plugins and output to remote locations;
+- Tracing: Provides distributed tracing capabilities, allowing reporting to the call chain system through plugins;
 - Telemetry: provides the ability to collect and report telemetry data. It is a plugin that integrates tracing, metrics and logging;
 
 When implementing a specific plugin, one needs to implement the plugin according to the standard interface of the plugin, register it in the core of the framework, and complete plugin instantiation; on the other side, the specific plugin also needs to implement features (such as service discovery, load balance) based on using the SDK or API of the external service governance system.
@@ -96,6 +96,6 @@ The above figure describes the steps that an RPC call must go through. Based on 
 
 In this picture, we have added a new layer of filter layer. Its main purpose is to use the idea of ​​AOP to meet customized needs (such as parameter verification, log replay, fault injection, etc.) and service governance (such as metrics, tracing, logging, authentication, etc.) that are inserted into the request/response processing process in a cross-cutting manner. This design enhances the framework's scalability.
 
-At the same time, tRPC modularizes each layer and adopts plug-in implementation. The framework connects the entire process of RPC calls through the idea of interface-based programming. For some modules, the framework also adopts a more fine-grained module splitting. For example: the Selector module is subdivided into sub-modules such as service discovery, service routing, load balanc and etc., and the Codec layer is also subdivided into three sub-modules: encode/decode, serialization and compression.
+At the same time, tRPC modularizes each layer and adopts pluggable implementation. The framework connects the entire process of RPC calls through the idea of interface-based programming. For some modules, the framework also adopts a more fine-grained module splitting. For example: the Selector module is subdivided into sub-modules such as service discovery, service routing, load balanc and etc., and the Codec layer is also subdivided into three sub-modules: encode/decode, serialization and compression.
 
-Through the above overall layered design, plug-in implementation of specific modules and fine-grained module splitting, the framework has strong scalability and openness. Businesses can flexibly replace plugins to achieve connecting with different systems, and can also implement personalized capabilities.
+Through the above overall layered design, pluggable implementation of specific modules and fine-grained module splitting, the framework has strong scalability and openness. Businesses can flexibly replace plugins to achieve connecting with different systems, and can also implement personalized capabilities.

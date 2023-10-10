@@ -15,7 +15,7 @@ The following table shows the capabilities and requirements of tRPC for communic
 |  Capabilities |Demands   |
 | ------------ | ------------ |
 |  RPC	| remote interface call like local interface call |
-|  Stream | the protocol should be able to solve the problem of transmitting large data packets and meet the scenario of streaming data transmission.  |
+|  Streaming | the protocol should be able to solve the problem of transmitting large data packets and meet the scenario of streaming data transmission.  |
 |  High Performance	 | the protocol design and implementation need to consider performance issues|
 |  Compatibility & Scalability	| the protocol design and implementation should have forward compatibility and scalability |
 |  Support Multiple Serialization | the protocol design should support multiple serialization methods, such as protobuf, JSON, etc. |
@@ -38,11 +38,11 @@ The figure below is the specific design of the tRPC protocol.
 
 ![ 'image.png'](/docs/images/trpc-protocol.png)
 
-The tRPC protocol supports two transmission methods: unary and stream.
+The tRPC protocol supports two transmission methods: unary and streaming.
 
 for unary RPC(one-request-one-response), the entire data packet = Fix Header（16 bytes）+ Unary Header + Unary Body.
 
-for stream RPC, the entire data packet = Fix Header（16 bytes）+ Stream Frame(Init/Data/Feeback/CLose) 
+for streaming RPC, the entire data packet = Fix Header（16 bytes）+ Streaming Frame(Init/Data/Feeback/CLose) 
 
 the complete protocol definition, please see [trpc.proto](/trpc/trpc.proto)
 
@@ -57,7 +57,7 @@ the complete protocol definition, please see [trpc.proto](/trpc/trpc.proto)
 ```protobuf
 // Two types are currently supported:
 // 1. The data frame type for unary(one-response-one-response)
-// 2. The data frame type for stream
+// 2. The data frame type for streaming
 enum TrpcDataFrameType {
 TRPC_UNARY_FRAME = 0x00;
 
@@ -90,19 +90,19 @@ TRPC_STREAM_FRAME_CLOSE = 0x04;
 
 For unary(one response one response), total data size = fixed header size + header size + body size
 
-For stream, total data size = fixed header size + stream frame size
+For streaming, total data size = fixed header size + streaming frame size
 
 - The 9-10 bytes
 
 For unary(one response one response), header size
 
-For stream, set 0
+For streaming, set 0
 
 - The 11-14 bytes
 
 For unary(one response one response), unique-id
 
-For stream, stream-id
+For streaming, stream-id
 
 stream-id needs to be unique in a single connection
 
@@ -231,13 +231,13 @@ message ResponseProtocol {
 }
 ```
 
-### Stream Frame
+### Streaming Frame
 
-After 16 bytes, for stream, it is followed by the stream frame
+After 16 bytes, for streaming, it is followed by the streaming frame
 
 Divided into init, data, feedback, close frame.
 
-- Init Frame is used for stream initialization
+- Init Frame is used for streaming initialization
 
 - Data Frame is used to transmit streaming data
 
@@ -248,7 +248,7 @@ Divided into init, data, feedback, close frame.
 #### Init Frame
 
 ```protobuf
-// The message definition of stream `INIT` frame
+// The message definition of streaming `INIT` frame
 message TrpcStreamInitMeta {
   // request meta information
   TrpcStreamInitRequestMeta request_meta = 1;
@@ -272,7 +272,7 @@ message TrpcStreamInitMeta {
 ```
 
 ```protobuf
-// The request meta information definition of stream `INIT` frame
+// The request meta information definition of streaming `INIT` frame
 message TrpcStreamInitRequestMeta {
   // Caller name
   // The specification format: trpc.application_name.server_name.proto_service_name, 4 segments
@@ -303,7 +303,7 @@ message TrpcStreamInitRequestMeta {
 ```
 
 ```protobuf
-// The response meta information definition of stream `INIT` frame
+// The response meta information definition of streaming `INIT` frame
 message TrpcStreamInitResponseMeta {
   // Error code
   // The specific value corresponds to `TrpcRetCode`
@@ -322,7 +322,7 @@ The data frame corresponds to the message body of the actual request
 #### Feedback Frame
 
 ```protobuf
-// The meta information definition of stream `FEEDBACK` frame
+// The meta information definition of streaming `FEEDBACK` frame
 message TrpcStreamFeedBackMeta {
   // increased window size
   uint32 window_size_increment = 1;
@@ -334,7 +334,7 @@ message TrpcStreamFeedBackMeta {
 Close frame is divided into normal Close and abnormal Close (Reset)
 
 ```protobuf
-// The closed type of trpc stream protocol
+// The closed type of trpc streaming protocol
 enum TrpcStreamCloseType {
   // normal closes unidirectional flow
   TRPC_STREAM_CLOSE = 0;
@@ -345,7 +345,7 @@ enum TrpcStreamCloseType {
 ```
 
 ```protobuf
-// The meta information definition of trpc stream protocol for closing stream
+// The meta information definition of trpc streaming protocol for closing stream
 message TrpcStreamCloseMeta {
   // The type of stream closure, close one end, or close all
   int32 close_type = 1;
@@ -411,7 +411,7 @@ message Response {
 ```
 
 
-Stream IDL
+Streaming IDL
 
 Support:
 
