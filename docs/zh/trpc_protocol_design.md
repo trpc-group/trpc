@@ -56,7 +56,7 @@ tRPC协议支持一应一答和流式两种传输方式。
 ```protobuf
 // Two types are currently supported:
 // 1. The data frame type for unary(one-response-one-response)
-// 2. The data frame type for stream
+// 2. The data frame type for streaming
 enum TrpcDataFrameType {
 TRPC_UNARY_FRAME = 0x00;
 
@@ -239,7 +239,7 @@ message ResponseProtocol {
 #### Init帧
 
 ```protobuf
-// The message definition of stream `INIT` frame
+// The message definition of streaming `INIT` frame
 message TrpcStreamInitMeta {
   // request meta information
   TrpcStreamInitRequestMeta request_meta = 1;
@@ -263,7 +263,7 @@ message TrpcStreamInitMeta {
 ```
 
 ```protobuf
-// The request meta information definition of stream `INIT` frame
+// The request meta information definition of streaming `INIT` frame
 message TrpcStreamInitRequestMeta {
   // Caller name
   // The specification format: trpc.application_name.server_name.proto_service_name, 4 segments
@@ -294,7 +294,7 @@ message TrpcStreamInitRequestMeta {
 ```
 
 ```protobuf
-// The response meta information definition of stream `INIT` frame
+// The response meta information definition of streaming `INIT` frame
 message TrpcStreamInitResponseMeta {
   // Error code
   // The specific value corresponds to `TrpcRetCode`
@@ -312,7 +312,7 @@ DATA帧对应的是实际请求的消息体
 #### Feedback帧
 
 ```protobuf
-// The meta information definition of stream `FEEDBACK` frame
+// The meta information definition of streaming `FEEDBACK` frame
 message TrpcStreamFeedBackMeta {
   // increased window size
   uint32 window_size_increment = 1;
@@ -324,7 +324,7 @@ message TrpcStreamFeedBackMeta {
 Close帧分为正常的 Close帧 和 异常的 Close（Reset）帧。
 
 ```protobuf
-// The closed type of trpc stream protocol
+// The closed type of trpc streaming protocol
 enum TrpcStreamCloseType {
   // normal closes unidirectional flow
   TRPC_STREAM_CLOSE = 0;
@@ -335,7 +335,7 @@ enum TrpcStreamCloseType {
 ```
 
 ```protobuf
-// The meta information definition of trpc stream protocol for closing stream
+// The meta information definition of trpc streaming protocol for closing stream
 message TrpcStreamCloseMeta {
   // The type of stream closure, close one end, or close all
   int32 close_type = 1;
