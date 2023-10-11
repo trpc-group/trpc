@@ -6,23 +6,23 @@ English | [中文](README.zh_CN.md)
 
 tRPC is a high-performance RPC development framework which is designed based on the concept of pluggable，the overall design follows the following principles:
 - Simplicity: Users develop service very simply based on the framework;
-- High Performance: The framework should be applicable to a broad class of use-cases while sacrificing little in performance when compared to a use-case specific framework;
-- Pluggable: The entire framework should be layered and modular, and each module should preferably be pluggable and evolves independently;
+- High Performance: The performant of the framework can be applicable to massive scenario on the internet;
+- Pluggable: The framework is layered and modularized in architectural design and implementation, and each core module be pluggable and evolves independently;
 
-You can use it:
+By using tRPC, you can:
 - Build services (trpc/http(s)/grpc, etc.) with multiple ports that support multiple protocols (one port only support one protocol), and can handle client requests synchronously/asynchronously;
 - Access various protocol backend services (trpc/http(s)/grpc, etc.) in a synchronous, asynchronous, and one-way;
 - Streaming RPC programming, currently supports trpc streaming, grpc streaming, http streaming, etc., to implement streaming application services such as Push, File Upload/Download, and AI Serving;
-- Pluggable support for various protocols and service governance systems, such as: customized protocols, various name-service/metrics systems/tracing systems/config-center systems/log system, etc., to facilitate service interoperability and service operation;
+- Support various protocols and service governance systems, such as: customized protocols, various name-service/metrics systems/tracing systems/config-center systems/log system, etc., to facilitate service interoperability and operation;
 
 ## Features
 
-- Works across languages: Implements cross-language service communication based on protobuf IDL;
-- Support multi-protocols: Supports multiple communication protocols and interoperates with different frameworks (such as grpc);
-- Stream RPC: In addition to supporting unary rpc call, tRPC also supports streaming rpc call, which better solves the application scenarios of large data transmission, such as: large file upload/download,message push,  speech recognition/video understanding, etc;
-- Rich plugin ecosystem: Provides a large number of plugins that docking to microservice components (such as consul/promethues/opentelemetry, etc.) to facilitate users to build their own service governance system;
-- Scalability: Based on the pluggable design of the framework,  users can develop secondary to expand the framework capabilities, such as: parameter validation, authentication, log replay, etc;
-- Flow control and overload protection: Provides flow control and overload protection plugins in a variety of application scenarios to prevent services from being overloaded and unavailable due to burst traffic;
+- Works across languages：Implements cross-language service communication based on protobuf IDL.
+- Support multi-protocols：Supports multiple communication protocols and interoperates with different frameworks (such as grpc).
+- Stream RPC: In addition to supporting unary rpc call, tRPC also supports streaming rpc call, which better solves the application scenarios of large data transmission, such as: large file upload/download,message push, speech recognition/video understanding, etc.
+- Rich plugin ecosystem: Provides a large number of plugins that docking to microservice components (such as consul/promethues/opentelemetry, etc.) to facilitate users to build their own service governance system
+- Scalability: Based on the pluggable design of the framework,  users can develop secondary to expand the framework capabilities, such as: parameter validation, authentication, log replay, etc.
+- Flow control and overload protection: provides flow control and overload protection plugins in a variety of application scenarios to prevent services from being overloaded and unavailable due to burst traffic.
 
 ## Supported languages
 
