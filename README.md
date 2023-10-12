@@ -4,16 +4,16 @@ English | [中文](README.zh_CN.md)
 
 ## What is tRPC
 
-tRPC is a high-performance RPC development framework which is designed based on the concept of pluggable，the overall design follows the following principles:
-- Simplicity: Users develop service very simply based on the framework;
-- High Performance: The performant of the framework can be applicable to massive scenario on the internet;
-- Pluggable: The framework is layered and modularized in architectural design and implementation, and each core module be pluggable and evolves independently;
+tRPC is a high-performance RPC framework that designed based on the concept of pluggable，the overall design follows the following principles:
+- Simplicity: Users develop service very simply based on the framework.
+- High Performance: The performant of the framework can be applicable to massive scenario on the internet.
+- Pluggable: The framework is layered and modularized in architectural design and implementation, and each core module be pluggable and evolves independently.
 
 By using tRPC, you can:
-- Build services (trpc/http(s)/grpc, etc.) with multiple ports that support multiple protocols (one port only support one protocol), and can handle client requests synchronously/asynchronously;
-- Access various protocol backend services (trpc/http(s)/grpc, etc.) in a synchronous, asynchronous, and one-way;
-- Streaming RPC programming, currently supports trpc streaming, grpc streaming, http streaming, etc., to implement streaming application services such as Push, File Upload/Download, and AI Serving;
-- Support various protocols and service governance systems, such as: customized protocols, various name-service/metrics systems/tracing systems/config-center systems/log system, etc., to facilitate service interoperability and operation;
+- Build services (trpc/http(s)/grpc, etc.) with multiple ports that support multiple protocols (one port only support one protocol), and can handle client requests synchronously/asynchronously.
+- Access various protocol backend services (trpc/http(s)/grpc, etc.) in a synchronous, asynchronous, and one-way.
+- Streaming RPC programming, currently supports trpc streaming, grpc streaming, http streaming, etc., to implement streaming application services such as Push, File Upload/Download, and AI Serving.
+- Support various protocols and service governance systems, such as: customized protocols, various name-service/metrics systems/tracing systems/config-center systems/log system, etc., to facilitate service interoperability and operation.
 
 ## Features
 
