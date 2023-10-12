@@ -45,7 +45,7 @@ tRPC是基于插件化理念设计的一款支持多语言、高性能的rpc开�
     - [代码示例](https://github.com/trpc-group/trpc-cpp/tree/main/examples)
 - tRPC-Go:
     - [快速开始](https://github.com/trpc-group/trpc-go/blob/main/docs/quick_start.zh_CN.md)
-    - [基础教程]()
+    - [基础教程](https://github.com/trpc-group/trpc-go/blob/main/docs/basics_tutorial.zh_CN.md)
     - [用户指南](https://github.com/trpc-group/trpc-go/tree/main/docs/README.md)
     - [代码示例](https://github.com/trpc-group/trpc-go/tree/main/examples)
 

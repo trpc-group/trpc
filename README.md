@@ -45,7 +45,7 @@ Per-language quickstart guides and tutorials can be found in the [tRPC website](
     - [examples](https://github.com/trpc-group/trpc-cpp/tree/main/examples)
 - tRPC-Go:
     - [quick start](https://github.com/trpc-group/trpc-go/blob/main/docs/quick_start.md)
-    - [basic tutorial]()
+    - [basic tutorial](https://github.com/trpc-group/trpc-go/blob/main/docs/basics_tutorial.md)
     - [user guide](https://github.com/trpc-group/trpc-go/tree/main/docs/README.md)
     - [examples](https://github.com/trpc-group/trpc-go/tree/main/examples)
 
