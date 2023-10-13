@@ -17,10 +17,10 @@ By using tRPC, you can:
 
 ## Features
 
-- Works across languages：Implements cross-language service communication based on protobuf IDL.
+- Works across languages：Implements cross-language service communication based on Protocol Buffers IDL.
 - Support multi-protocols：Supports multiple communication protocols and interoperates with different frameworks (such as grpc).
 - Streaming RPC: Supports streaming RPC, which is better suited for various application scenarios such as large file upload/download, message push, AI speech recognition/video understanding, etc.
-- Rich plugin ecosystem: Provides a large number of plugins that docking to microservice components (such as consul/promethues/opentelemetry, etc.) to facilitate users to build their own service governance system.
+- Rich plugin ecosystem: Provides a large number of plugins that docking to microservice components (such as Consul/Promethues/OpenTelemetry, etc.) to facilitate users to build their own service governance system.
 - Scalability: Based on the pluggable design of the framework,  users can develop secondary to expand the framework capabilities, such as: parameter validation, authentication, log replay, etc.
 - Flow control and overload protection: provides flow control and overload protection plugins in a variety of application scenarios to prevent services from being overloaded and unavailable due to burst traffic.
 
