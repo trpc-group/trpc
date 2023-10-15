@@ -63,7 +63,7 @@ message HelloReply {
 
 ```
 
-Based on the usage of the protobuf, tRPC has formulated a unified specification for the name of the RPC interface on the trpc protocol. The RPC method name is composed of **"/{package_name}.{service_name}/{method_name}"** in the proto file.
+Based on the usage of the Protobuf, tRPC has formulated a unified specification for the name of the RPC interface on the trpc protocol. The RPC method name is composed of **"/{package_name}.{service_name}/{method_name}"** in the proto file.
 
 Among them, we recommend using `trpc.{app}.{server}` for the name of `{package_name}`, `{service_name}` is the service name defined in the proto file above, and `{method_name}` is the specific method name under the service , that is the RPC interface we want to call.
 

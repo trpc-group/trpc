@@ -21,18 +21,18 @@ tRPC插件在成熟度上，目前分为以下4级：
 
 | 插件类型  |   插件   |  成熟度  |  文档 |
 | -------- | -------- | :------: | :---------------------------------------------------------------------------------: |
-| 协议  | http |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/http_protocol_service.md) |
-| 协议  | grpc |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/grpc_protocol_service.md) |
-| 序列化  | protobuf |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/serialization.md) |
-| 序列化  | json |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/serialization.md) |
+| 协议  | HTTP |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/http_protocol_service.md) |
+| 协议  | gRPC |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/grpc_protocol_service.md) |
+| 序列化  | Protobuf |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/serialization.md) |
+| 序列化  | JSON |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/serialization.md) |
 | 序列化  | text |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/serialization.md) |
 | 序列化  | binary |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/serialization.md) |
-| 解压缩  | gzip |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/compression.md) |
+| 解压缩  | Gzip |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/compression.md) |
 | 解压缩  | lz4 |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/compression.md) |
-| 解压缩  | snappy |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/compression.md) |
+| 解压缩  | Snappy |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/compression.md) |
 | 解压缩  | zlib |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/compression.md) |
 | 名字服务系统  | MeshPolaris |  tested  | [链接](https://github.com/trpc-group/cpp-naming-polarismesh/blob/main/README_zh.md) |
-| 配置中心系统  | Etcd |  tested  | [链接](https://github.com/trpc-group/cpp-config-etcd/blob/main/README_zh.md) |
+| 配置中心系统  | etcd |  tested  | [链接](https://github.com/trpc-group/cpp-config-etcd/blob/main/README_zh.md) |
 | 监控系统  | Prometheus |  stable  | [链接](https://github.com/trpc-group/trpc-cpp/blob/main/docs/zh/prometheus_metrics.md) |
 | 调用链系统  | Jaeger |  stable  | [链接](https://github.com/trpc-group/cpp-tracing-jaeger/blob/main/README_zh.md) |
 | 远程日志系统  | CLS |  stable  | [链接](https://github.com/trpc-group/cpp-logging-cls/blob/main/README_zh.md) |
@@ -42,10 +42,10 @@ tRPC插件在成熟度上，目前分为以下4级：
 
 | 插件类型  |   插件   |  成熟度  |  文档 |
 | -------- | -------- | :------: | :---------------------------------------------------------------------------------: |
-| 协议  | http |  stable  | [链接](https://github.com/trpc-group/trpc-go/tree/main/http) |
-| 协议  | grpc |  stable  | [链接](https://github.com/trpc-ecosystem/go-codec/tree/main/grpc) |
+| 协议  | HTTP |  stable  | [链接](https://github.com/trpc-group/trpc-go/tree/main/http) |
+| 协议  | gRPC |  stable  | [链接](https://github.com/trpc-ecosystem/go-codec/tree/main/grpc) |
 | 名字服务系统  | MeshPolaris |  tested  | [链接](https://github.com/trpc-ecosystem/go-naming-polarismesh) |
-| 配置中心系统  | Etcd |  tested  | [链接](https://github.com/trpc-ecosystem/go-config-etcd) |
+| 配置中心系统  | etcd |  tested  | [链接](https://github.com/trpc-ecosystem/go-config-etcd) |
 | 监控系统  | Prometheus |  stable  | [链接](https://github.com/trpc-ecosystem/go-metrics-prometheus) |
 | 调用链系统  | Jaeger |  stable  | [链接](https://github.com/trpc-ecosystem/go-opentracing-jaeger) |
 | 远程日志系统  | CLS |  stable  | [链接](https://github.com/trpc-ecosystem/go-log-cls) |

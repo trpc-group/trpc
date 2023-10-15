@@ -21,18 +21,18 @@ The plugin types of tRPC mainly include codec, filter, naming, config, metrics, 
 
 | Type  |   Plugin   |  Maturity  |  Doc |
 | -------- | -------- | :------: | :---------------------------------------------------------------------------------: |
-| Codec  | http |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/http_protocol_service.md) |
-| Codec  | grpc |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/grpc_protocol_service.md) |
-| Serialiazation  | protobuf |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/serialization.md) |
-| Serialiazation  | json |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/serialization.md) |
+| Codec  | HTTP |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/http_protocol_service.md) |
+| Codec  | gRPC |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/grpc_protocol_service.md) |
+| Serialiazation  | Protobuf |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/serialization.md) |
+| Serialiazation  | JSON |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/serialization.md) |
 | Serialiazation  | text |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/serialization.md) |
 | Serialiazation  | binary |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/serialization.md) |
-| Compressor  | gzip |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/compression.md) |
+| Compressor  | Gzip |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/compression.md) |
 | Compressor  | lz4 |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/compression.md) |
-| Compressor  | snappy |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/compression.md) |
+| Compressor  | Snappy |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/compression.md) |
 | Compressor  | zlib |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/compression.md) |
 | naming  | MeshPolaris |  tested  | [link](https://github.com/trpc-group/cpp-naming-polarismesh/blob/main/README.md) |
-| config  | Etcd |  tested  | [link](https://github.com/trpc-group/cpp-config-etcd/blob/main/README.md) |
+| config  | etcd |  tested  | [link](https://github.com/trpc-group/cpp-config-etcd/blob/main/README.md) |
 | metrics  | Prometheus |  stable  | [link](https://github.com/trpc-group/trpc-cpp/blob/main/docs/en/prometheus_metrics.md) |
 | tracing  | Jaeger |  stable  | [link](https://github.com/trpc-group/cpp-tracing-jaeger/blob/main/README_zh.md) |
 | logging  | CLS |  stable  | [link](https://github.com/trpc-group/cpp-logging-cls/blob/main/README_zh.md) |
@@ -42,10 +42,10 @@ The plugin types of tRPC mainly include codec, filter, naming, config, metrics, 
 
 | Type  |   Plugin   |  Maturity  |  Doc |
 | -------- | -------- | :------: | :---------------------------------------------------------------------------------: |
-| Codec  | http |  stable  | [link](https://github.com/trpc-group/trpc-go/tree/main/http) |
-| Codec  | grpc |  stable  | [link](https://github.com/trpc-ecosystem/go-codec/tree/main/grpc) |
+| Codec  | HTTP |  stable  | [link](https://github.com/trpc-group/trpc-go/tree/main/http) |
+| Codec  | gRPC |  stable  | [link](https://github.com/trpc-ecosystem/go-codec/tree/main/grpc) |
 | naming  | MeshPolaris |  tested  | [link](https://github.com/trpc-ecosystem/go-naming-polarismesh) |
-| config  | Etcd |  tested  | [link](https://github.com/trpc-ecosystem/go-config-etcd) |
+| config  | etcd |  tested  | [link](https://github.com/trpc-ecosystem/go-config-etcd) |
 | metrics  | Prometheus |  stable  | [link](https://github.com/trpc-ecosystem/go-metrics-prometheus) |
 | tracing  | Jaeger |  stable  | [link](https://github.com/trpc-ecosystem/go-opentracing-jaeger) |
 | logging  | CLS |  stable  | [link](https://github.com/trpc-ecosystem/go-log-cls) |

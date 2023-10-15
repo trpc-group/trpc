@@ -65,7 +65,7 @@ The overall architecture consists of two parts: "**Framework Core**" and "**Plug
 
 The core of the framework can be divided into three layers:
 
-- **Communication Layer**: responsible for data transmission and protocol encoding and decoding. the framework has built-in support for communication protocols such as tcp and udp and uses the tRPC protocol based on protobuf to carry RPC messages. It also supports other transmission protocols through codec plugins;
+- **Communication Layer**: responsible for data transmission and protocol encoding and decoding. the framework has built-in support for communication protocols such as tcp and udp and uses the tRPC protocol based on Protobuf to carry RPC messages. It also supports other transmission protocols through codec plugins;
 
 - **Service Governance Layer**: responsible for abstracting service governance functions into plugins and connecting them with service governance systems by calling plugins to realize service discovery, load balance, monitor, tracing, etc.
 
@@ -86,7 +86,7 @@ When implementing a specific plugin, one needs to implement the plugin according
 
 ## Specific Architecture Design
 
-Before talking about the specific architecture design, let's first look at the process of rpc call. From a developer's perspective, it allows you to make cross-node function call like local function call. Usually a complete RPC process is as follows:
+Before talking about the specific architecture design, let's first look at the process of RPC. From a developer's perspective, it allows you to make cross-node function call like local function call. Usually a complete RPC process is as follows:
 
 ![rpc](/docs/images/rpc.png)
 
