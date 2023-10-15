@@ -6,7 +6,7 @@ This article mainly introduces the tRPC protocol.
 
 First of all, tRPC is a multi-language RPC framework that requires a unified transmission protocol for communication and some functional alignment during communication.
 
-Secondly, why tRPC does not choose the http/http2 protocol? The main reason here is performance problem.
+Secondly, why tRPC does not choose the HTTP/HTTP2 protocol? The main reason here is performance problem.
 
 Finally, in addition to forward compatibility, tRPC also has strong scalability requirements in the communication protocol, and can expand the ability to support various business requirements.
 
@@ -18,7 +18,7 @@ The following table shows the capabilities and requirements of tRPC for communic
 |  Streaming | the protocol should be able to solve the problem of transmitting large data packets and meet the scenario of streaming data transmission.  |
 |  High Performance	 | the protocol design and implementation need to consider performance issues|
 |  Compatibility & Scalability	| the protocol design and implementation should have forward compatibility and scalability |
-|  Support Multiple Serialization | the protocol design should support multiple serialization methods, such as protobuf, JSON, etc. |
+|  Support Multiple Serialization | the protocol design should support multiple serialization methods, such as Protobuf, JSON, etc. |
 |  Support multiple Decompression |  the protocol design should support multiple decompression methods. | 
 |  Request Timeout Control	  | The protocol should provide the ability to control request timeout  |
 |  Passing Tracing Information |  The protocol should provide the ability to pass tracing information |
@@ -28,7 +28,7 @@ The following table shows the capabilities and requirements of tRPC for communic
 
 In order to support these capabilities and requirements, the overall design of the tRPC protocol is as follows:
 
-Protocol header (custom design) + Protocol body (use protobuf by default, extensible)
+Protocol header (custom design) + Protocol body (use Protobuf by default, extensible)
 
 # Design And Implementation
 
