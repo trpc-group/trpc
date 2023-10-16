@@ -49,8 +49,12 @@ tRPC是基于插件化理念设计的一款支持多语言、高性能的RPC框�
     - [用户指南](https://github.com/trpc-group/trpc-go/tree/main/docs/README.md)
     - [代码示例](https://github.com/trpc-group/trpc-go/tree/main/examples)
 
-## 如何为tRPC做贡献
+## 如何参与贡献
 
 非常欢迎大家给tRPC做贡献!
 
-建议您在为tRPC贡献之前, 先阅读一下 [如何贡献](https://github.com/trpc-group/trpc/blob/main/CONTRIBUTORS.zh_CN.md) , 它会指导你了解贡献代码的整个流程, 比如: 如何提pr/如何构建代码/如何运行单元测试等;
+建议您在为tRPC贡献之前, 先阅读一下 [如何参与贡献](https://github.com/trpc-group/trpc/blob/main/CONTRIBUTORS.zh_CN.md) , 它会指导你了解贡献代码的整个流程, 比如: 如何提PR/如何构建代码/如何运行单元测试等.
+
+## 建议反馈
+
+* bug、疑惑、修改建议都欢迎提在[Issues](https://github.com/trpc-group/trpc/issues)中.

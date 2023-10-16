@@ -45,7 +45,7 @@ When opening an issue, make sure to answer these five questions:
 4. What did you expect to see?
 5. What did you see instead?
 
-For change proposals, see Proposing Changes To [tRPC-Proposals](to-do).
+For change proposals, see Proposing Changes To [tRPC-Proposals](https://github.com/trpc-group/trpc/blob/main/proposal/README.md).
 
 ## Contributing code
 
