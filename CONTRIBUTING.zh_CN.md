@@ -46,7 +46,7 @@ issue 会被分类以管理工作流程。
 
 遵循 [GitHub 流程](https://docs.github.com/en/get-started/quickstart/github-flow)来[创建 GitHub PR(Pull Request)](https://docs.github.com/en/get-started/quickstart/github-flow#create-a-pull-request)。
 
-如果你是第一次向 tRPC-Go 项目提交 PR，那么在该 PR 的对话栏中会提醒你签署并提交[贡献者许可协议](https://github.com/trpc-group/cla-database/blob/main/Tencent-Contributor-License-Agreement.md)。
+如果你是第一次向 tRPC 项目提交 PR，那么在该 PR 的对话栏中会提醒你签署并提交[贡献者许可协议](https://github.com/trpc-group/cla-database/blob/main/Tencent-Contributor-License-Agreement.md)。
 只有当你签署过贡献者许可协议，你提交的 PR 才有可能被接受。
 请记住以下几点：
 
