@@ -45,6 +45,7 @@ For change proposals, see Proposing Changes To [tRPC-Proposals](https://github.c
 ## Contributing code
 
 Follow the [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) to [create a GitHub pull request](https://docs.github.com/en/get-started/quickstart/github-flow#create-a-pull-request).
+
 If this is your first time submitting a PR to the tRPC project, you will be reminded in the "Conversation" tab of the PR to sign and submit the [Contributor License Agreement](https://github.com/trpc-group/cla-database/blob/main/Tencent-Contributor-License-Agreement.md).
 Only when you have signed the Contributor License Agreement, your submitted PR has the possibility of being accepted.
 
