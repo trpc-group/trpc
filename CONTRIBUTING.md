@@ -9,11 +9,6 @@ This document aims to provide you with a detailed contribution guide to help you
 Please read this guide carefully before contributing and make sure to follow the rules here.
 We look forward to working with you to make this project better together!
 
-## Becoming a contributor
-
-The first step is registering as a tRPC contributor.
-Before sending your first change to the tRPC project you must have [signed and submitted a CLA (Contributor License Agreement)](https://github.com/trpc-group/cla-database/blob/main/README.md).
-
 ## Before contributing code
 
 The project welcomes code patches, but to make sure things are well coordinated you should discuss any significant change before starting the work.
@@ -50,6 +45,10 @@ For change proposals, see Proposing Changes To [tRPC-Proposals](https://github.c
 ## Contributing code
 
 Follow the [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) to [create a GitHub pull request](https://docs.github.com/en/get-started/quickstart/github-flow#create-a-pull-request).
+
+If this is your first time submitting a PR to the tRPC project, you will be reminded in the "Conversation" tab of the PR to sign and submit the [Contributor License Agreement](https://github.com/trpc-group/cla-database/blob/main/Tencent-Contributor-License-Agreement.md).
+Only when you have signed the Contributor License Agreement, your submitted PR has the possibility of being accepted.
+
 
 Some things to keep in mind:
 - Ensure that your code conforms to the project's code specifications.
@@ -107,7 +106,7 @@ When this change is eventually applied, the issue tracker will automatically mar
 ### Copyright headers
 
 Files in the tRPC repository don't list author names, both to avoid clutter and to avoid having to keep the lists up to date.
-Instead, your name will appear in the [change log](todo).
+Instead, your name will appear in the change log.
 
 New files that you contribute should use the standard copyright header:
 

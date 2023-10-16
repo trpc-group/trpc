@@ -9,11 +9,6 @@
 在贡献之前，请仔细阅读本指南并确保遵循这里的规则。
 我们期待与您共同努力，使这个项目变得更好！
 
-## 成为贡献者
-
-第一步是注册为 tRPC 贡献者。
-向 tRPC 项目发送您的第一个变更之前，您必须签署并提交[贡献者许可协议](https://github.com/trpc-group/cla-database/blob/main/README.md)。
-
 ## 在贡献代码之前
 
 项目欢迎代码补丁，但为了确保事情得到良好协调，您应该在开始工作之前讨论任何重大变更。
@@ -51,6 +46,8 @@ issue 会被分类以管理工作流程。
 
 遵循 [GitHub 流程](https://docs.github.com/en/get-started/quickstart/github-flow)来[创建 GitHub PR(Pull Request)](https://docs.github.com/en/get-started/quickstart/github-flow#create-a-pull-request)。
 
+如果你是第一次向 tRPC 项目提交 PR，那么在该 PR 的对话栏中会提醒你签署并提交[贡献者许可协议](https://github.com/trpc-group/cla-database/blob/main/Tencent-Contributor-License-Agreement.md)。
+只有当你签署过贡献者许可协议，你提交的 PR 才有可能被接受。
 请记住以下几点：
 
 - 确保您的代码符合项目的代码规范。
