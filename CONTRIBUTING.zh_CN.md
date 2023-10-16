@@ -12,7 +12,7 @@
 ## 成为贡献者
 
 第一步是注册为 tRPC 贡献者。
-向 tRPC 项目发送您的第一个变更之前，您必须签署并提交[贡献者许可协议](to-do)。
+向 tRPC 项目发送您的第一个变更之前，您必须签署并提交[贡献者许可协议](https://github.com/trpc-group/cla-database/blob/main/README.md)。
 
 ## 在贡献代码之前
 
