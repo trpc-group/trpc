@@ -45,7 +45,7 @@ issue 会被分类以管理工作流程。
 4. 您期望看到什么？
 5. 您实际看到的是什么？
 
-关于变更提案，请参阅向 [tRPC-Proposals](to-do) 提议变更。
+关于变更提案，请参阅向 [tRPC-Proposals](https://github.com/trpc-group/trpc/blob/main/proposal/README.zh_CN.md) 提议变更。
 
 ## 贡献代码
 

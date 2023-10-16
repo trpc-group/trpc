@@ -54,3 +54,7 @@ Per-language quickstart guides and tutorials can be found in the [tRPC website](
 Contributions are welcome!
 
 Please read [How to contribute](https://github.com/trpc-group/trpc/blob/main/CONTRIBUTORS.md) which will guide you through the entire workflow of how to build the source code, how to run the tests, and how to contribute changes to the tRPC codebase.
+
+## Feedback
+
+Report bugs, ask questions or give suggestions by [Issues](https://github.com/trpc-group/trpc/issues)
