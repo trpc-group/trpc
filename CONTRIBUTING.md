@@ -12,7 +12,7 @@ We look forward to working with you to make this project better together!
 ## Becoming a contributor
 
 The first step is registering as a tRPC contributor.
-Before sending your first change to the tRPC project you must have [signed and submitted a CLA (Contributor License Agreement)](to-do).
+Before sending your first change to the tRPC project you must have [signed and submitted a CLA (Contributor License Agreement)](https://github.com/trpc-group/cla-database/blob/main/README.md).
 
 ## Before contributing code
 
