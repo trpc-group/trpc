@@ -20,7 +20,7 @@ The benefits of service naming like this are:
 2. For service addressing, a globally unique service route name can be generated to facilitate service registration and service discovery;
 3. For service operation, it can facilitate service deployment, monitor data collection, alarms, etc.;
 
-The following figure is a flow chart of service A using rpc to call service B:
+The following figure is a flow chart of service A using RPC to call service B:
 
 ![rpc_workflow](/docs/images/rpc_workflow.png)
 

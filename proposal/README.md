@@ -4,7 +4,7 @@ English | [中文](README_zh_CN.md)
 
 ## Introduction
 
-Before getting started, please familiarize yourself with the tRPC project through the [official website](http://test.trpc.group.woa.com/).
+Before getting started, please familiarize yourself with the tRPC project through the [official website](https://trpc.group/).
 
 This repository is mainly used to record proposals for major feature evolutions in tRPC.
 It can:

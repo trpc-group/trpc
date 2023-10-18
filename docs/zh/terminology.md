@@ -12,8 +12,8 @@
 
 tRPC在服务命名上定义了以下3个纬度信息：
 1. app名（应用名），表示某个业务系统的名称，用于标识某个业务下不同服务模块的一个集合；
-2. seerver名（模块名），表示具体服务模块的名称，一般也称为模块的进程名称；
-3. Service名，表示具体服务提供者的名称，一般使用proto文件定义的Service名称；
+2. server名（模块名），表示具体服务模块的名称，一般也称为模块的进程名称；
+3. service名，表示具体服务提供者的名称，一般使用proto文件定义的Service名称；
 其中`app.server` 的组合在全局上要具备唯一性。
 
 服务命名这样定义的好处是：
@@ -21,7 +21,7 @@ tRPC在服务命名上定义了以下3个纬度信息：
 2. 对于服务寻址，可以生成全局唯一的服务路由名称，方便服务注册和服务发现；
 3. 对于服务运营，可以方便服务的部署、各种维度的监控数据采集、告警等；
 
-下图是服务A使用rpc调用服务B的流程图：
+下图是服务A使用RPC调用服务B的流程图：
 
 ![rpc_workflow](/docs/images/rpc_workflow.png)
 
@@ -64,7 +64,7 @@ message HelloReply {
 
 ```
 
-基于proto文件的用法，tRPC在trpc协议上对RPC接口的名字制定了统一的规范，RPC调用方法名由proto文件中的 **"/{package_name}.{service_name}/{method_name}"** 组成。其中 `{package_name}` 的命名我们建议使用 `trpc.{app}.{server}`，`{service_name}` 为上面proto文件中定义的service名字，`{method_name}` 为service下具体的方法名，即我们要调用的RPC接口。
+基于proto文件的用法，tRPC在tRPC协议上对RPC接口的名字制定了统一的规范，RPC调用方法名由proto文件中的 **"/{package_name}.{service_name}/{method_name}"** 组成。其中 `{package_name}` 的命名我们建议使用 `trpc.{app}.{server}`，`{service_name}` 为上面proto文件中定义的service名字，`{method_name}` 为service下具体的方法名，即我们要调用的RPC接口。
 
 ## Service与路由名字的映射
 

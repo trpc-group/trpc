@@ -4,7 +4,7 @@
 
 ## 介绍
 
-在开始之前，请先通过[官方网站](http://test.trpc.group.woa.com/)了解 tRPC 项目。
+在开始之前，请先通过[官方网站](https://trpc.group/)了解 tRPC 项目。
 
 本仓库主要用于记录 tRPC 中重大功能演进的提案。它可以
 
