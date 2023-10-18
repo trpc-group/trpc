@@ -106,7 +106,7 @@ For streaming, stream-id
 
 stream-id needs to be unique in a single connection
 
-- The 15 byte, the version of trpc protocol
+- The 15 byte, the version of tRPC protocol
 
 - The 16 byte, reserved field
 
