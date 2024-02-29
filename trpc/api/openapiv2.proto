@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package trpc.api;
+
+option go_package = "git.woa.com/trpc/trpc-protocol/pb/go/trpc/api";
+option java_package = "com.tencent.trpc.protobuf.ext";
+
+// message option schema
+message Schema {
+    JSONSchema json_schema = 1;
+}
+
+// `JSONSchema` represents properties from JSON SCHEMA taken,and as used, in
+//  the OpenAPI v2 spec.
+message JSONSchema {
+    repeated string required = 1;
+}

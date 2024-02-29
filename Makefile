@@ -6,7 +6,8 @@ all:
 	protoc -I$(INCLUDE_GOOGLE_PB_PATH) -I.\
 		--go_out=paths=source_relative:./$(DIR) \
 		./trpc/api/annotations.proto \
-		./trpc/api/http.proto 
+		./trpc/api/http.proto \
+		./trpc/api/openapiv2.proto 
 	protoc -I$(INCLUDE_GOOGLE_PB_PATH) -I.\
 		--go_out=./$(DIR) \
 		./trpc/trpc.proto \

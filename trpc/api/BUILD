@@ -15,5 +15,6 @@ proto_library(
     name = "http_proto",
     srcs = [
         "http.proto",
+        "openapiv2.proto",
     ],
 )
