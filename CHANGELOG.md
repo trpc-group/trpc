@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.4.1](https://git.woa.com/trpc/trpc-protocol/tree/v0.4.0)(2024-04-02)
+### Features And Improvements
+- trpc流式协议新增流空闲关闭的错误码
+
+### Thanks to our Contributors
+irislao(劳昭丹)
+
 ## [0.4.0](https://git.woa.com/trpc/trpc-protocol/tree/v0.4.0)(2023-05-17)
 ### Features And Improvements
 - 拓展trpc协议支持lz4解压缩类型
