@@ -1,5 +1,12 @@
 # Change Log
 
+## [pb/go/trpc/v0.2.0](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/v0.2.0)(2024-07-02)
+
+### Features
+- add openapiv2.proto support json_schema
+- regenerate stub code to include LZ4_BLOCK_COMPRESS field
+- add reflection.proto and corresponding go stub code to support server reflection !36
+
 ## [0.4.1](https://git.woa.com/trpc/trpc-protocol/tree/v0.4.0)(2024-04-02)
 ### Features And Improvements
 - trpc流式协议新增流空闲关闭的错误码
