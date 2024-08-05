@@ -234,7 +234,15 @@ enum TrpcContentEncodeType {
   TRPC_XML_ENCODE = 5;
 
   // thrift
+  // 由于历史原因，早期实现的 thrift 使用的是二进制编码
+  // 因此这里的 thrift 代表 thrift-binary
   TRPC_THRIFT_ENCODE = 6;
+
+  // thrift-compact
+  TRPC_THRIFT_COMPACT_ENCODE = 7;
+
+  // text/xml
+  TRPC_TEXT_XML_ENCODE = 8;
 }
 
 // trpc协议中 data 内容的压缩类型
