@@ -1,6 +1,16 @@
 # Change Log
 
-## [pb/go/trpc/v0.2.0](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/v0.2.0)(2024-07-02)
+## ## [pb/go/trpc/relfection/v0.1.0](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/reflection/v0.1.0)(2024-08-02)
+
+- add reflection go stub code to support server reflection 
+
+## [pb/go/trpc/v0.2.1](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/v0.2.1) (2024-08-02)
+
+### Features
+
+- remove reflection package to fix https://git.woa.com/trpc-go/trpc-go/issues/987
+
+## [pb/go/trpc/v0.2.0](https://git.woa.com/trpc/trpc-protocol/tree/pb/go/trpc/v0.2.0)(2024-07-02) 
 
 ### Features
 - add openapiv2.proto support json_schema
