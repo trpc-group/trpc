@@ -49,6 +49,10 @@ tRPC是基于插件化理念设计的一款支持多语言、高性能的RPC框�
     - [用户指南](https://github.com/trpc-group/trpc-go/tree/main/docs/README.zh_CN.md)
     - [代码示例](https://github.com/trpc-group/trpc-go/tree/main/examples)
 
+## 如何用wireshark分析tRPC协议
+
+参考 [docs/zh/wireshark_trpc.md](docs/zh/wireshark_trpc.md)。
+
 ## 如何参与贡献
 
 非常欢迎大家给tRPC做贡献!
