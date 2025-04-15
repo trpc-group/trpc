@@ -26,13 +26,13 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// 框架协议头里的魔数
+// The magic value in the framework protocol header
 type TrpcMagic int32
 
 const (
-	// trpc不用这个值，为了提供给pb工具生成代码
+	// trpc does not use this value, it is used by the pb tool to generate code
 	TrpcMagic_TRPC_DEFAULT_NONE TrpcMagic = 0
-	// trpc协议默认使用这个魔数
+	// trpc protocol uses this magic value by default
 	TrpcMagic_TRPC_MAGIC_VALUE TrpcMagic = 2352
 )
 
@@ -75,16 +75,16 @@ func (TrpcMagic) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{0}
 }
 
-// trpc协议的二进制数据帧类型
-// 目前支持两种类型的二进制数据帧：
-// 1. 一应一答模式的二进制数据帧类型
-// 2. 流式模式的二进制数据帧类型
+// The binary data frame type of the trpc protocol
+// Currently supports two types of binary data frames:
+// 1. Binary data frame type for request-response mode
+// 2. Binary data frame type for streaming mode
 type TrpcDataFrameType int32
 
 const (
-	// trpc一应一答模式的二进制数据帧类型
+	// Binary data frame type for trpc request-response mode
 	TrpcDataFrameType_TRPC_UNARY_FRAME TrpcDataFrameType = 0
-	// trpc流式模式的二进制数据帧类型
+	// Binary data frame type for trpc streaming mode
 	TrpcDataFrameType_TRPC_STREAM_FRAME TrpcDataFrameType = 1
 )
 
@@ -127,25 +127,25 @@ func (TrpcDataFrameType) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{1}
 }
 
-// trpc协议流式的二进制数据帧类型
-// 目前流式帧类型分4种：INIT/DATA/FEEDBACK/CLOSE，其中CLOSE帧不带业务数据
-// INIT帧：FIXHEADER + TrpcStreamInitMeta
-// DATA帧：FIXHEADER + body(业务序列化的数据)
-// FEEDBACK帧：FIXHEADER + TrpcStreamFeedBackMeta（触发策略，高低水位+定时）
-// CLOSE帧：FIXHEADER + TrpcStreamCloseMeta
-// 连接和流空闲超时的回收机制不考虑
+// The binary data frame type of trpc protocol streaming
+// Currently there are 4 types of streaming frames: INIT/DATA/FEEDBACK/CLOSE, where CLOSE frame does not carry business data
+// INIT frame: FIXHEADER + TrpcStreamInitMeta
+// DATA frame: FIXHEADER + body(business serialized data)
+// FEEDBACK frame: FIXHEADER + TrpcStreamFeedBackMeta (trigger strategy: high/low water level + timer)
+// CLOSE frame: FIXHEADER + TrpcStreamCloseMeta
+// Connection and stream idle timeout recycling mechanism is not considered
 type TrpcStreamFrameType int32
 
 const (
-	// 一应一答的默认取值
+	// Default value for request-response
 	TrpcStreamFrameType_TRPC_UNARY TrpcStreamFrameType = 0
-	// 流式INIT帧类型
+	// Streaming INIT frame type
 	TrpcStreamFrameType_TRPC_STREAM_FRAME_INIT TrpcStreamFrameType = 1
-	// 流式DATA帧类型
+	// Streaming DATA frame type
 	TrpcStreamFrameType_TRPC_STREAM_FRAME_DATA TrpcStreamFrameType = 2
-	// 流式FEEDBACK帧类型
+	// Streaming FEEDBACK frame type
 	TrpcStreamFrameType_TRPC_STREAM_FRAME_FEEDBACK TrpcStreamFrameType = 3
-	// 流式CLOSE帧类型
+	// Streaming CLOSE frame type
 	TrpcStreamFrameType_TRPC_STREAM_FRAME_CLOSE TrpcStreamFrameType = 4
 )
 
@@ -194,13 +194,13 @@ func (TrpcStreamFrameType) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{2}
 }
 
-// trpc流式关闭类型
+// trpc streaming close type
 type TrpcStreamCloseType int32
 
 const (
-	// 正常单向流关闭
+	// Normal unidirectional stream close
 	TrpcStreamCloseType_TRPC_STREAM_CLOSE TrpcStreamCloseType = 0
-	// 异常关闭双向流
+	// Abnormal bidirectional stream close
 	TrpcStreamCloseType_TRPC_STREAM_RESET TrpcStreamCloseType = 1
 )
 
@@ -243,11 +243,11 @@ func (TrpcStreamCloseType) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{3}
 }
 
-// trpc协议版本
+// trpc protocol version
 type TrpcProtoVersion int32
 
 const (
-	// 默认版本
+	// Default version
 	TrpcProtoVersion_TRPC_PROTO_V1 TrpcProtoVersion = 0
 )
 
@@ -288,13 +288,13 @@ func (TrpcProtoVersion) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{4}
 }
 
-// trpc协议中的调用类型
+// Call type in trpc protocol
 type TrpcCallType int32
 
 const (
-	// 一应一答调用，包括同步、异步
+	// Request-response call, including synchronous and asynchronous
 	TrpcCallType_TRPC_UNARY_CALL TrpcCallType = 0
-	// 单向调用
+	// One-way call
 	TrpcCallType_TRPC_ONEWAY_CALL TrpcCallType = 1
 )
 
@@ -337,21 +337,21 @@ func (TrpcCallType) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{5}
 }
 
-// trpc协议中的消息透传支持的类型
+// Message transparent transmission supported types in trpc protocol
 type TrpcMessageType int32
 
 const (
-	// trpc 不用这个值，为了提供给 pb 工具生成代码
+	// trpc does not use this value, it is used by the pb tool to generate code
 	TrpcMessageType_TRPC_DEFAULT TrpcMessageType = 0
-	// 染色
+	// Dyeing
 	TrpcMessageType_TRPC_DYEING_MESSAGE TrpcMessageType = 1
-	// 调用链
+	// Tracing
 	TrpcMessageType_TRPC_TRACE_MESSAGE TrpcMessageType = 2
-	// 多环境
+	// Multi-environment
 	TrpcMessageType_TRPC_MULTI_ENV_MESSAGE TrpcMessageType = 4
-	// 灰度
+	// Gray
 	TrpcMessageType_TRPC_GRID_MESSAGE TrpcMessageType = 8
-	// set名
+	// Set name
 	TrpcMessageType_TRPC_SETNAME_MESSAGE TrpcMessageType = 16
 )
 
@@ -402,9 +402,9 @@ func (TrpcMessageType) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{6}
 }
 
-// trpc协议中 data 内容的编码类型
-// 默认使用pb
-// 目前约定 0-127 范围的取值为框架规范的序列化方式,框架使用
+// Encoding type of data content in trpc protocol
+// Default uses pb
+// Currently agreed that values in the range 0-127 are framework-standard serialization methods, used by framework
 type TrpcContentEncodeType int32
 
 const (
@@ -416,7 +416,7 @@ const (
 	TrpcContentEncodeType_TRPC_JSON_ENCODE TrpcContentEncodeType = 2
 	// flatbuffer
 	TrpcContentEncodeType_TRPC_FLATBUFFER_ENCODE TrpcContentEncodeType = 3
-	// 不序列化
+	// No serialization
 	TrpcContentEncodeType_TRPC_NOOP_ENCODE TrpcContentEncodeType = 4
 	// xml
 	TrpcContentEncodeType_TRPC_XML_ENCODE TrpcContentEncodeType = 5
@@ -473,25 +473,25 @@ func (TrpcContentEncodeType) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{7}
 }
 
-// trpc协议中 data 内容的压缩类型
-// 默认使用不压缩
+// Compression type of data content in trpc protocol
+// Default uses no compression
 type TrpcCompressType int32
 
 const (
-	// 默认不使用压缩
+	// Default no compression
 	TrpcCompressType_TRPC_DEFAULT_COMPRESS TrpcCompressType = 0
-	// 使用gzip
+	// Use gzip
 	TrpcCompressType_TRPC_GZIP_COMPRESS TrpcCompressType = 1
-	// 使用snappy
+	// Use snappy
 	//
-	// Deprecated: 建议使用 TRPC_SNAPPY_STREAM_COMPRESS/TRPC_SNAPPY_BLOCK_COMPRESS, 因为现在
-	// trpc-go 和 trpc-cpp 分别的使用的是 stream、block 模式，二者不兼容，跨语言调用会出错
+	// Deprecated: It is recommended to use TRPC_SNAPPY_STREAM_COMPRESS/TRPC_SNAPPY_BLOCK_COMPRESS, because currently
+	// trpc-go and trpc-cpp use stream and block modes respectively, which are incompatible, cross-language calls will cause errors
 	TrpcCompressType_TRPC_SNAPPY_COMPRESS TrpcCompressType = 2
-	// 使用zlib
+	// Use zlib
 	TrpcCompressType_TRPC_ZLIB_COMPRESS TrpcCompressType = 3
-	// 使用 stream 模式的 snappy
+	// Use snappy in stream mode
 	TrpcCompressType_TRPC_SNAPPY_STREAM_COMPRESS TrpcCompressType = 4
-	// 使用 block 模式的 snappy
+	// Use snappy in block mode
 	TrpcCompressType_TRPC_SNAPPY_BLOCK_COMPRESS TrpcCompressType = 5
 )
 
@@ -542,109 +542,109 @@ func (TrpcCompressType) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{8}
 }
 
-// 框架层接口调用的返回码定义
+// Definition of framework layer interface call return codes
 type TrpcRetCode int32
 
 const (
-	// 调用成功
+	// Call success
 	TrpcRetCode_TRPC_INVOKE_SUCCESS TrpcRetCode = 0
-	// 协议错误码
-	// 服务端解码错误
+	// Protocol error codes
+	// Server-side decode error
 	TrpcRetCode_TRPC_SERVER_DECODE_ERR TrpcRetCode = 1
-	// 服务端编码错误
+	// Server-side encode error
 	TrpcRetCode_TRPC_SERVER_ENCODE_ERR TrpcRetCode = 2
-	// service或者func路由错误码
-	// 服务端没有调用相应的service实现
+	// Service or func routing error codes
+	// Server does not have corresponding service implementation
 	TrpcRetCode_TRPC_SERVER_NOSERVICE_ERR TrpcRetCode = 11
-	// 服务端没有调用相应的接口实现
+	// Server does not have corresponding interface implementation
 	TrpcRetCode_TRPC_SERVER_NOFUNC_ERR TrpcRetCode = 12
-	// 超时/过载/限流错误码
-	// 请求在服务端超时
+	// Timeout/overload/limiter error codes
+	// Request timed out on server
 	TrpcRetCode_TRPC_SERVER_TIMEOUT_ERR TrpcRetCode = 21
-	// 请求在服务端被过载保护而丢弃请求
-	// 主要用在框架内部实现的过载保护插件上
+	// Request discarded due to server overload protection
+	// Mainly used in framework's internal overload protection plugin
 	TrpcRetCode_TRPC_SERVER_OVERLOAD_ERR TrpcRetCode = 22
-	// 请求在服务端被限流
-	// 主要用在外部服务治理系统的插件或者业务自定义的限流插件上，比如: 北极星限流
+	// Request limited on server
+	// Mainly used in external service governance system plugins or business custom limiter plugins, eg: Polaris limiter
 	TrpcRetCode_TRPC_SERVER_LIMITED_ERR TrpcRetCode = 23
-	// 请求在服务端因全链路超时时间而超时
+	// Request timed out on server due to full link timeout
 	TrpcRetCode_TRPC_SERVER_FULL_LINK_TIMEOUT_ERR TrpcRetCode = 24
-	// 服务端系统错误
+	// Server system error
 	TrpcRetCode_TRPC_SERVER_SYSTEM_ERR TrpcRetCode = 31
-	// 服务端鉴权失败错误
+	// Server authentication failure error
 	TrpcRetCode_TRPC_SERVER_AUTH_ERR TrpcRetCode = 41
-	// 服务端请求参数自动校验失败错误
+	// Server request parameter automatic validation failure error
 	TrpcRetCode_TRPC_SERVER_VALIDATE_ERR TrpcRetCode = 51
-	// 超时错误码
-	// 请求在客户端调用超时
+	// Timeout error codes
+	// Request timed out on client
 	TrpcRetCode_TRPC_CLIENT_INVOKE_TIMEOUT_ERR TrpcRetCode = 101
-	// 请求在客户端因全链路超时时间而超时
+	// Request timed out on client due to full link timeout
 	TrpcRetCode_TRPC_CLIENT_FULL_LINK_TIMEOUT_ERR TrpcRetCode = 102
-	// 网络相关错误码
-	// 客户端连接错误
+	// Network related error codes
+	// Client connection error
 	TrpcRetCode_TRPC_CLIENT_CONNECT_ERR TrpcRetCode = 111
-	// 协议相关错误码
-	// 客户端编码错误
+	// Protocol related error codes
+	// Client encode error
 	TrpcRetCode_TRPC_CLIENT_ENCODE_ERR TrpcRetCode = 121
-	// 客户端解码错误
+	// Client decode error
 	TrpcRetCode_TRPC_CLIENT_DECODE_ERR TrpcRetCode = 122
-	// 过载保护/限流相关错误码
-	// 请求在客户端被限流
-	// 主要用在外部服务治理系统的插件或者业务自定义的限流插件上，比如: 北极星限流
+	// Overload protection/limiter related error codes
+	// Request limited on client
+	// Mainly used in external service governance system plugins or business custom limiter plugins, eg: Polaris limiter
 	TrpcRetCode_TRPC_CLIENT_LIMITED_ERR TrpcRetCode = 123
-	// 请求在客户端被过载保护而丢弃请求
-	// 主要用在框架内部实现的过载保护插件上
+	// Request discarded due to client overload protection
+	// Mainly used in framework's internal overload protection plugin
 	TrpcRetCode_TRPC_CLIENT_OVERLOAD_ERR TrpcRetCode = 124
-	// 路由相关错误码
-	// 客户端选ip路由错误
+	// Routing related error codes
+	// Client IP routing error
 	TrpcRetCode_TRPC_CLIENT_ROUTER_ERR TrpcRetCode = 131
-	// 客户端网络错误
+	// Client network error
 	TrpcRetCode_TRPC_CLIENT_NETWORK_ERR TrpcRetCode = 141
-	// 客户端响应参数自动校验失败错误
+	// Client response parameter automatic validation failure error
 	TrpcRetCode_TRPC_CLIENT_VALIDATE_ERR TrpcRetCode = 151
-	// 上游主动断开连接，提前取消请求错误
+	// Upstream actively disconnected, early cancellation request error
 	TrpcRetCode_TRPC_CLIENT_CANCELED_ERR TrpcRetCode = 161
-	// 服务端流式网络错误, 详细错误码需要在实现过程中再梳理
+	// Server-side streaming network error, detailed error codes need to be sorted out during implementation
 	TrpcRetCode_TRPC_STREAM_SERVER_NETWORK_ERR TrpcRetCode = 201
-	// 服务端流式传输错误, 详细错误码需要在实现过程中再梳理
-	// 比如：流消息过大等
+	// Server-side streaming transmission error, detailed error codes need to be sorted out during implementation
+	// eg: Stream message too large, etc.
 	TrpcRetCode_TRPC_STREAM_SERVER_MSG_EXCEED_LIMIT_ERR TrpcRetCode = 211
-	// 服务端流式编码错误
+	// Server-side streaming encode error
 	TrpcRetCode_TRPC_STREAM_SERVER_ENCODE_ERR TrpcRetCode = 221
-	// 客户端流式编解码错误
+	// Client-side streaming encode/decode error
 	TrpcRetCode_TRPC_STREAM_SERVER_DECODE_ERR TrpcRetCode = 222
-	// 服务端流式写错误, 详细错误码需要在实现过程中再梳理
+	// Server-side streaming write error, detailed error codes need to be sorted out during implementation
 	TrpcRetCode_TRPC_STREAM_SERVER_WRITE_END          TrpcRetCode = 231
 	TrpcRetCode_TRPC_STREAM_SERVER_WRITE_OVERFLOW_ERR TrpcRetCode = 232
 	TrpcRetCode_TRPC_STREAM_SERVER_WRITE_CLOSE_ERR    TrpcRetCode = 233
 	TrpcRetCode_TRPC_STREAM_SERVER_WRITE_TIMEOUT_ERR  TrpcRetCode = 234
-	// 服务端流式读错误, 详细错误码需要在实现过程中再梳理
+	// Server-side streaming read error, detailed error codes need to be sorted out during implementation
 	TrpcRetCode_TRPC_STREAM_SERVER_READ_END         TrpcRetCode = 251
 	TrpcRetCode_TRPC_STREAM_SERVER_READ_CLOSE_ERR   TrpcRetCode = 252
 	TrpcRetCode_TRPC_STREAM_SERVER_READ_EMPTY_ERR   TrpcRetCode = 253
 	TrpcRetCode_TRPC_STREAM_SERVER_READ_TIMEOUT_ERR TrpcRetCode = 254
-	// 客户端流式网络错误, 详细错误码需要在实现过程中再梳理
+	// Client-side streaming network error, detailed error codes need to be sorted out during implementation
 	TrpcRetCode_TRPC_STREAM_CLIENT_NETWORK_ERR TrpcRetCode = 301
-	// 客户端流式传输错误, 详细错误码需要在实现过程中再梳理
-	// 比如：流消息过大等
+	// Client-side streaming transmission error, detailed error codes need to be sorted out during implementation
+	// eg: Stream message too large, etc.
 	TrpcRetCode_TRPC_STREAM_CLIENT_MSG_EXCEED_LIMIT_ERR TrpcRetCode = 311
-	// 客户端流式编码错误
+	// Client-side streaming encode error
 	TrpcRetCode_TRPC_STREAM_CLIENT_ENCODE_ERR TrpcRetCode = 321
-	// 客户端流式编解码错误
+	// Client-side streaming encode/decode error
 	TrpcRetCode_TRPC_STREAM_CLIENT_DECODE_ERR TrpcRetCode = 322
-	// 客户端流式写错误, 详细错误码需要在实现过程中再梳理
+	// Client-side streaming write error, detailed error codes need to be sorted out during implementation
 	TrpcRetCode_TRPC_STREAM_CLIENT_WRITE_END          TrpcRetCode = 331
 	TrpcRetCode_TRPC_STREAM_CLIENT_WRITE_OVERFLOW_ERR TrpcRetCode = 332
 	TrpcRetCode_TRPC_STREAM_CLIENT_WRITE_CLOSE_ERR    TrpcRetCode = 333
 	TrpcRetCode_TRPC_STREAM_CLIENT_WRITE_TIMEOUT_ERR  TrpcRetCode = 334
-	// 客户端流式读错误, 详细错误码需要在实现过程中再梳理
+	// Client-side streaming read error, detailed error codes need to be sorted out during implementation
 	TrpcRetCode_TRPC_STREAM_CLIENT_READ_END         TrpcRetCode = 351
 	TrpcRetCode_TRPC_STREAM_CLIENT_READ_CLOSE_ERR   TrpcRetCode = 352
 	TrpcRetCode_TRPC_STREAM_CLIENT_READ_EMPTY_ERR   TrpcRetCode = 353
 	TrpcRetCode_TRPC_STREAM_CLIENT_READ_TIMEOUT_ERR TrpcRetCode = 354
-	// 未明确的错误
+	// Unspecified error
 	TrpcRetCode_TRPC_INVOKE_UNKNOWN_ERR TrpcRetCode = 999
-	// 未明确的错误
+	// Unspecified error
 	TrpcRetCode_TRPC_STREAM_UNKNOWN_ERR TrpcRetCode = 1000
 )
 
@@ -781,25 +781,25 @@ func (TrpcRetCode) EnumDescriptor() ([]byte, []int) {
 	return file_trpc_v2_trpc_proto_rawDescGZIP(), []int{9}
 }
 
-// trpc流式的流控帧头消息定义
+// Definition of flow control frame header message for trpc streaming
 type TrpcStreamInitMeta struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// init请求元信息
+	// INIT request metadata
 	RequestMeta *TrpcStreamInitRequestMeta `protobuf:"bytes,1,opt,name=request_meta,json=requestMeta,proto3" json:"request_meta,omitempty"`
-	// init响应元信息
+	// INIT response metadata
 	ResponseMeta *TrpcStreamInitResponseMeta `protobuf:"bytes,2,opt,name=response_meta,json=responseMeta,proto3" json:"response_meta,omitempty"`
-	// 由接收端告知发送端初始的发送窗口大小
+	// Initial send window size notified by receiver to sender
 	InitWindowSize uint32 `protobuf:"varint,3,opt,name=init_window_size,json=initWindowSize,proto3" json:"init_window_size,omitempty"`
-	// 请求数据的序列化类型
-	// 比如: proto/jce/json, 默认proto
-	// 具体值与TrpcContentEncodeType对应
+	// Serialization type of request data
+	// eg: proto/jce/json, default proto
+	// Specific value corresponds to TrpcContentEncodeType
 	ContentType uint32 `protobuf:"varint,4,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	// 请求数据使用的压缩方式
-	// 比如: gzip/snappy/..., 默认不使用
-	// 具体值与TrpcCompressType对应
+	// Compression method used for request data
+	// eg: gzip/snappy/..., default not used
+	// Specific value corresponds to TrpcCompressType
 	ContentEncoding uint32 `protobuf:"varint,5,opt,name=content_encoding,json=contentEncoding,proto3" json:"content_encoding,omitempty"`
 }
 
@@ -870,30 +870,30 @@ func (x *TrpcStreamInitMeta) GetContentEncoding() uint32 {
 	return 0
 }
 
-// trpc流式init头的请求元信息
+// Request metadata definition for trpc streaming INIT header
 type TrpcStreamInitRequestMeta struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// 主调服务的名称
-	// trpc协议下的规范格式: trpc.应用名.服务名.pb的service名, 4段
+	// Name of the calling service
+	// Standard format in trpc protocol: trpc.application_name.server_name.proto_service_name, 4 segments
 	Caller []byte `protobuf:"bytes,1,opt,name=caller,proto3" json:"caller,omitempty"`
-	// 被调服务的路由名称
-	// trpc协议下的规范格式，trpc.应用名.服务名.pb的service名[.接口名]
-	// 前4段是必须有，接口可选。
+	// Routing name of the called service
+	// Standard format in trpc protocol: trpc.application_name.server_name.proto_service_name[.interface_name]
+	// First 4 segments are mandatory, interface is optional
 	Callee []byte `protobuf:"bytes,2,opt,name=callee,proto3" json:"callee,omitempty"`
-	// 调用服务的接口名
-	// 规范格式: /package.Service名称/接口名
+	// Interface name of the called service
+	// Standard format: /package.Service_name/interface_name
 	Func []byte `protobuf:"bytes,3,opt,name=func,proto3" json:"func,omitempty"`
-	// 框架信息透传的消息类型
-	// 比如调用链、染色key、灰度、鉴权、多环境、set名称等的标识
-	// 具体值与TrpcMessageType对应
+	// Message type for framework information transparent transmission
+	// Such as tracing, dyeing key, gray, authentication, multi-environment, set name, etc.
+	// Specific value corresponds to TrpcMessageType
 	MessageType uint32 `protobuf:"varint,4,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`
-	// 框架透传的信息key-value对，目前分两部分
-	// 1是框架层要透传的信息，key的名字要以trpc-开头
-	// 2是业务层要透传的信息，业务可以自行设置
-	// 注意: trans_info中的key-value对会全链路透传，业务请谨慎使用！
+	// Key-value pairs for framework transparent transmission information, currently divided into two parts:
+	// 1. Information to be transparently transmitted by the framework layer, key names must start with 'trpc-'
+	// 2. Information to be transparently transmitted by the business layer, which can be set by the business itself
+	// Note: Key-value pairs in trans_info will be transparently transmitted through the entire link, please use with caution!
 	TransInfo map[string][]byte `protobuf:"bytes,5,rep,name=trans_info,json=transInfo,proto3" json:"trans_info,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
@@ -964,17 +964,17 @@ func (x *TrpcStreamInitRequestMeta) GetTransInfo() map[string][]byte {
 	return nil
 }
 
-// trpc流式init头的响应元信息
+// Response metadata definition for trpc streaming INIT header
 type TrpcStreamInitResponseMeta struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// 请求在框架层的错误返回码
-	// 具体值与TrpcRetCode对应
+	// Error return code at framework layer
+	// Specific value corresponds to TrpcRetCode
 	Ret int32 `protobuf:"varint,1,opt,name=ret,proto3" json:"ret,omitempty"`
-	// 调用结果信息描述
-	// 失败的时候用
+	// Call result information description
+	// Used when failed
 	ErrorMsg []byte `protobuf:"bytes,2,opt,name=error_msg,json=errorMsg,proto3" json:"error_msg,omitempty"`
 }
 
@@ -1024,13 +1024,13 @@ func (x *TrpcStreamInitResponseMeta) GetErrorMsg() []byte {
 	return nil
 }
 
-// trpc流式的流控帧头元信息定义
+// Definition of flow control frame header metadata for trpc streaming
 type TrpcStreamFeedBackMeta struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// 增加的窗口大小
+	// Incremented window size
 	WindowSizeIncrement uint32 `protobuf:"varint,1,opt,name=window_size_increment,json=windowSizeIncrement,proto3" json:"window_size_increment,omitempty"`
 }
 
@@ -1073,29 +1073,29 @@ func (x *TrpcStreamFeedBackMeta) GetWindowSizeIncrement() uint32 {
 	return 0
 }
 
-// trpc流式的RESET帧头消息定义
+// Definition of RESET frame header message for trpc streaming
 type TrpcStreamCloseMeta struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// 关闭的类型，关闭一端，还是全部关闭
+	// Close type, whether to close one end or all
 	CloseType int32 `protobuf:"varint,1,opt,name=close_type,json=closeType,proto3" json:"close_type,omitempty"`
-	// close返回码
-	// 代表框架层的错误
+	// Close return code
+	// Represents framework layer error
 	Ret int32 `protobuf:"varint,2,opt,name=ret,proto3" json:"ret,omitempty"`
-	// close信息描述
+	// Close information description
 	Msg []byte `protobuf:"bytes,3,opt,name=msg,proto3" json:"msg,omitempty"`
-	// 框架信息透传的消息类型
-	// 比如调用链、染色key、灰度、鉴权、多环境、set名称等的标识
-	// 具体值与TrpcMessageType对应
+	// Message type for framework information transparent transmission
+	// Such as tracing, dyeing key, gray, authentication, multi-environment, set name, etc.
+	// Specific value corresponds to TrpcMessageType
 	MessageType uint32 `protobuf:"varint,4,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`
-	// 框架透传的信息key-value对，目前分两部分
-	// 1是框架层要透传的信息，key的名字要以trpc-开头
-	// 2是业务层要透传的信息，业务可以自行设置
+	// Key-value pairs for framework transparent transmission information, currently divided into two parts:
+	// 1. Information to be transparently transmitted by the framework layer, key names must start with 'trpc-'
+	// 2. Information to be transparently transmitted by the business layer, which can be set by the business itself
 	TransInfo map[string][]byte `protobuf:"bytes,5,rep,name=trans_info,json=transInfo,proto3" json:"trans_info,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// 接口的错误返回码
-	// 建议业务在使用时，标识成功和失败，0代表成功，其它代表失败
+	// Interface error return code
+	// It is recommended to identify success and failure when using, 0 represents success, others represent failure
 	FuncRet int32 `protobuf:"varint,6,opt,name=func_ret,json=funcRet,proto3" json:"func_ret,omitempty"`
 }
 
@@ -1173,48 +1173,48 @@ func (x *TrpcStreamCloseMeta) GetFuncRet() int32 {
 	return 0
 }
 
-// 请求协议头
+// Request protocol header
 type RequestProtocol struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// 协议版本
-	// 具体值与TrpcProtoVersion对应
+	// Protocol version
+	// Specific value corresponds to TrpcProtoVersion
 	Version uint32 `protobuf:"varint,1,opt,name=version,proto3" json:"version,omitempty"`
-	// 请求的调用类型
-	// 比如: 普通调用，单向调用
-	// 具体值与TrpcCallType对应
+	// Call type of request
+	// eg: normal call, one-way call
+	// Specific value corresponds to TrpcCallType
 	CallType uint32 `protobuf:"varint,2,opt,name=call_type,json=callType,proto3" json:"call_type,omitempty"`
-	// 请求唯一id
+	// Request unique id
 	RequestId uint32 `protobuf:"varint,3,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
-	// 请求的超时时间，单位ms
+	// Request timeout, unit ms
 	Timeout uint32 `protobuf:"varint,4,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	// 主调服务的名称
-	// trpc协议下的规范格式: trpc.应用名.服务名.pb的service名, 4段
+	// Name of the calling service
+	// Standard format in trpc protocol: trpc.application_name.server_name.proto_service_name, 4 segments
 	Caller []byte `protobuf:"bytes,5,opt,name=caller,proto3" json:"caller,omitempty"`
-	// 被调服务的路由名称
-	// trpc协议下的规范格式，trpc.应用名.服务名.pb的service名[.接口名]
-	// 前4段是必须有，接口可选。
+	// Routing name of the called service
+	// Standard format in trpc protocol: trpc.application_name.server_name.proto_service_name[.interface_name]
+	// First 4 segments are mandatory, interface is optional
 	Callee []byte `protobuf:"bytes,6,opt,name=callee,proto3" json:"callee,omitempty"`
-	// 调用服务的接口名
-	// 规范格式: /package.Service名称/接口名
+	// Interface name of the called service
+	// Standard format: /package.Service_name/interface_name
 	Func []byte `protobuf:"bytes,7,opt,name=func,proto3" json:"func,omitempty"`
-	// 框架信息透传的消息类型
-	// 比如调用链、染色key、灰度、鉴权、多环境、set名称等的标识
-	// 具体值与TrpcMessageType对应
+	// Message type for framework information transparent transmission
+	// Such as tracing, dyeing key, gray, authentication, multi-environment, set name, etc.
+	// Specific value corresponds to TrpcMessageType
 	MessageType uint32 `protobuf:"varint,8,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`
-	// 框架透传的信息key-value对，目前分两部分
-	// 1是框架层要透传的信息，key的名字要以trpc-开头
-	// 2是业务层要透传的信息，业务可以自行设置
+	// Key-value pairs for framework transparent transmission information, currently divided into two parts:
+	// 1. Information to be transparently transmitted by the framework layer, key names must start with 'trpc-'
+	// 2. Information to be transparently transmitted by the business layer, which can be set by the business itself
 	TransInfo map[string][]byte `protobuf:"bytes,9,rep,name=trans_info,json=transInfo,proto3" json:"trans_info,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// 请求数据的序列化类型
-	// 比如: proto/jce/json, 默认proto
-	// 具体值与TrpcContentEncodeType对应
+	// Serialization type of request data
+	// eg: proto/jce/json, default proto
+	// Specific value corresponds to TrpcContentEncodeType
 	ContentType uint32 `protobuf:"varint,10,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	// 请求数据使用的压缩方式
-	// 比如: gzip/snappy/..., 默认不使用
-	// 具体值与TrpcCompressType对应
+	// Compression method used for request data
+	// eg: gzip/snappy/..., default not used
+	// Specific value corresponds to TrpcCompressType
 	ContentEncoding uint32 `protobuf:"varint,11,opt,name=content_encoding,json=contentEncoding,proto3" json:"content_encoding,omitempty"`
 }
 
@@ -1327,46 +1327,46 @@ func (x *RequestProtocol) GetContentEncoding() uint32 {
 	return 0
 }
 
-// 响应协议头
+// Response protocol header
 type ResponseProtocol struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// 协议版本
-	// 具体值与TrpcProtoVersion对应
+	// Protocol version
+	// Specific value corresponds to TrpcProtoVersion
 	Version uint32 `protobuf:"varint,1,opt,name=version,proto3" json:"version,omitempty"`
-	// 请求的调用类型
-	// 比如: 普通调用，单向调用
-	// 具体值与TrpcCallType对应
+	// Call type of request
+	// eg: normal call, one-way call
+	// Specific value corresponds to TrpcCallType
 	CallType uint32 `protobuf:"varint,2,opt,name=call_type,json=callType,proto3" json:"call_type,omitempty"`
-	// 请求唯一id
+	// Request unique id
 	RequestId uint32 `protobuf:"varint,3,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`
-	// 请求在框架层的错误返回码
-	// 具体值与TrpcRetCode对应
+	// Error return code at framework layer
+	// Specific value corresponds to TrpcRetCode
 	Ret int32 `protobuf:"varint,4,opt,name=ret,proto3" json:"ret,omitempty"`
-	// 接口的错误返回码
-	// 建议业务在使用时，标识成功和失败，0代表成功，其它代表失败
+	// Interface error return code
+	// It is recommended to identify success and failure when using, 0 represents success, others represent failure
 	FuncRet int32 `protobuf:"varint,5,opt,name=func_ret,json=funcRet,proto3" json:"func_ret,omitempty"`
-	// 调用结果信息描述
-	// 失败的时候用
+	// Call result information description
+	// Used when failed
 	ErrorMsg []byte `protobuf:"bytes,6,opt,name=error_msg,json=errorMsg,proto3" json:"error_msg,omitempty"`
-	// 框架信息透传的消息类型
-	// 比如调用链、染色key、灰度、鉴权、多环境、set名称等的标识
-	// 具体值与TrpcMessageType对应
+	// Message type for framework information transparent transmission
+	// Such as tracing, dyeing key, gray, authentication, multi-environment, set name, etc.
+	// Specific value corresponds to TrpcMessageType
 	MessageType uint32 `protobuf:"varint,7,opt,name=message_type,json=messageType,proto3" json:"message_type,omitempty"`
-	// 框架透传回来的信息key-value对，
-	// 目前分两部分
-	// 1是框架层透传回来的信息，key的名字要以trpc-开头
-	// 2是业务层透传回来的信息，业务可以自行设置
+	// Key-value pairs for framework transparent transmission information returned,
+	// Currently divided into two parts:
+	// 1. Information transparently transmitted back by the framework layer, key names must start with 'trpc-'
+	// 2. Information transparently transmitted back by the business layer, which can be set by the business itself
 	TransInfo map[string][]byte `protobuf:"bytes,8,rep,name=trans_info,json=transInfo,proto3" json:"trans_info,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// 响应数据的编码类型
-	// 比如: proto/jce/json, 默认proto
-	// 具体值与TrpcContentEncodeType对应
+	// Encoding type of response data
+	// eg: proto/jce/json, default proto
+	// Specific value corresponds to TrpcContentEncodeType
 	ContentType uint32 `protobuf:"varint,9,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
-	// 响应数据使用的压缩方式
-	// 比如: gzip/snappy/..., 默认不使用
-	// 具体值与TrpcCompressType对应
+	// Compression method used for response data
+	// eg: gzip/snappy/..., default not used
+	// Specific value corresponds to TrpcCompressType
 	ContentEncoding uint32 `protobuf:"varint,10,opt,name=content_encoding,json=contentEncoding,proto3" json:"content_encoding,omitempty"`
 }
 
