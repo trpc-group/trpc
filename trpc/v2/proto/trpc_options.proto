@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+package trpc.v2;
+
+option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/v2/proto";
+option java_package = "com.tencent.trpc.protobuf.ext";
+
+extend google.protobuf.MethodOptions {
+    string alias = 1155;
+}
+
+extend google.protobuf.FieldOptions {
+    string go_tag = 1156;
+}

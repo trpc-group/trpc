@@ -1,14 +1,8 @@
-// Tencent is pleased to support the open source community by making tRPC available.
-// Copyright (C) 2023 THL A29 Limited, a Tencent company. All rights reserved.
-// If you have downloaded a copy of the tRPC source code from Tencent,
-// please note that tRPC source code is licensed under the Apache 2.0 License,
-// A copy of the Apache 2.0 License is included in this file.
-
 syntax = "proto3";
 
-package trpc;
+package trpc.v2;
 
-option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc";
+option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/v2;trpc";
 option java_package = "com.tencent.trpc.proto.standard.common";
 option java_outer_classname = "TRPCProtocol";
 
@@ -240,15 +234,7 @@ enum TrpcContentEncodeType {
   TRPC_XML_ENCODE = 5;
 
   // thrift
-  // 由于历史原因，早期实现的 thrift 使用的是二进制编码
-  // 因此这里的 thrift 代表 thrift-binary
   TRPC_THRIFT_ENCODE = 6;
-
-  // thrift-compact
-  TRPC_THRIFT_COMPACT_ENCODE = 7;
-
-  // text/xml
-  TRPC_TEXT_XML_ENCODE = 8;
 }
 
 // trpc协议中 data 内容的压缩类型
@@ -274,12 +260,6 @@ enum TrpcCompressType {
 
   // 使用 block 模式的 snappy
   TRPC_SNAPPY_BLOCK_COMPRESS = 5;
-
-  // 使用 frame 模式的 lz4
-  TRPC_LZ4_FRAME_COMPRESS = 6;
-
-  // 使用 block 模式的 lz4
-  TRPC_LZ4_BLOCK_COMPRESS = 7;
 }
 
 // 框架层接口调用的返回码定义
@@ -367,9 +347,6 @@ enum TrpcRetCode {
   // 上游主动断开连接，提前取消请求错误
   TRPC_CLIENT_CANCELED_ERR = 161;
 
-  // 客户端读取 Frame 错误
-  TRPC_CLIENT_READ_FRAME_ERR = 171;
-
   // 服务端流式的错误码
   // 主要分几类:
   // 1.网络，2.编解码，3.写，4.读
@@ -399,9 +376,6 @@ enum TrpcRetCode {
   TRPC_STREAM_SERVER_READ_EMPTY_ERR = 253;
   TRPC_STREAM_SERVER_READ_TIMEOUT_ERR = 254;
 
-  // 服务端流空闲超时错误
-  TRPC_STREAM_SERVER_IDLE_TIMEOUT_ERR = 255;
-
   // 客户端流式的错误码
   // 主要分几类:
   // 1.网络，2.编解码，3.写，4.读
@@ -430,9 +404,6 @@ enum TrpcRetCode {
   TRPC_STREAM_CLIENT_READ_CLOSE_ERR = 352;
   TRPC_STREAM_CLIENT_READ_EMPTY_ERR = 353;
   TRPC_STREAM_CLIENT_READ_TIMEOUT_ERR = 354;
-
-  // 客户端流空闲超时错误
-  TRPC_STREAM_CLIENT_IDLE_TIMEOUT_ERR = 355;
 
   // 未明确的错误
   TRPC_INVOKE_UNKNOWN_ERR = 999;
@@ -492,9 +463,6 @@ message RequestProtocol {
   // 比如: gzip/snappy/..., 默认不使用
   // 具体值与TrpcCompressType对应
   uint32    content_encoding            = 11;
-
-  // attachment大小
-  uint32    attachment_size             = 12;
 }
 
 // 响应协议头
@@ -543,7 +511,4 @@ message ResponseProtocol {
   // 比如: gzip/snappy/..., 默认不使用
   // 具体值与TrpcCompressType对应
   uint32    content_encoding            = 10;
-
-  // attachment大小
-  uint32    attachment_size             = 12;
 }

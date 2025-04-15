@@ -1,7 +1,7 @@
 syntax = "proto2";
-package trpc.validate;
+package trpc.v2.validate;
 
-option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/validate";
+option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/v2/validate";
 option java_package = "com.tencent.trpc.protobuf.ext";
 
 import "google/protobuf/descriptor.proto";
@@ -12,23 +12,23 @@ import "google/protobuf/timestamp.proto";
 extend google.protobuf.MessageOptions {
     // Disabled nullifies any validation rules for this message, including any
     // message fields associated with it that do support validation.
-    optional bool disabled = 1071;
+    optional bool disabled = 1155;
     // Ignore skips generation of validation methods for this message.
-    optional bool ignored = 1072;
+    optional bool ignored = 1156;
 }
 
 // Validation rules applied at the oneof level
 extend google.protobuf.OneofOptions {
     // Required ensures that exactly one the field options in a oneof is set;
     // validation fails if no fields in the oneof are set.
-    optional bool required = 1071;
+    optional bool required = 1155;
 }
 
 // Validation rules applied at the field level
 extend google.protobuf.FieldOptions {
     // Rules specify the validations to be performed on this field. By default,
     // no validation is performed against a field.
-    optional FieldRules rules = 1071;
+    optional FieldRules rules = 1155;
 }
 
 // FieldRules encapsulates the rules for each type of field. Depending on the

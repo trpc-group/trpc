@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package trpc.reflection.v1;
+
+option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/reflection";
+option java_package = "com.tencent.trpc.protobuf.ext";
+
+service ServerReflection {
+  rpc ServiceReflectionInfo (ServerReflectionRequest) returns (ServerReflectionResponse);
+}
+
+// The message sent by the client when calling ServerReflectionInfo method.
+message ServerReflectionRequest {
+  string host = 1;
+  // To use reflection service, the client should set one of the following
+  // fields in message_request. The server distinguishes requests by their
+  // defined field and then handles them using corresponding methods.
+  oneof message_request {
+    // Find the proto file that declares the given fully-qualified symbol name.
+    // This field should be a fully-qualified symbol name
+    // (e.g. <package>.<service>[.<method>] or <package>.<type>).
+    string file_containing_symbol = 3;
+
+    // List the full names of registered services. The content will not be
+    // checked.
+    string list_services = 4;
+
+    // Find a proto file by the file name.
+    string file_by_filename = 5;
+  };
+}
+
+
+// The message sent by the server to answer ServerReflectionInfo method.
+message ServerReflectionResponse {
+  string valid_host = 1;
+  ServerReflectionRequest original_request = 2;
+  // The server sets one of the following fields according to the message_request
+  // in the request.
+  oneof message_response {
+    // This message is used to answer file_containing_symbol,
+    // As the repeated label is not allowed in oneof fields, we use a
+    // FileDescriptorResponse message to encapsulate the repeated fields.
+    FileDescriptorResponse file_descriptor_response = 4;
+    // This message is used to answer list_services requests.
+    ListServiceResponse list_services_response = 5;
+    // This message is used when an error occurs.
+    ErrorResponse error_response = 6;
+  }
+}
+
+// Serialized FileDescriptorProto messages sent by the server answering
+// a file_by_filename, file_containing_symbol, or file_containing_extension
+// request.
+message FileDescriptorResponse {
+  // Serialized FileDescriptorProto messages. We avoid taking a dependency on
+  // descriptor.proto, which uses proto2 only features, by making them opaque
+  // bytes instead.
+  repeated bytes file_descriptor_proto = 1;
+}
+
+
+// A list of ServiceResponse sent by the server answering list_services request.
+message ListServiceResponse {
+  // The information of each service may be expanded in the future, so we use
+  // ServiceResponse message to encapsulate it.
+  repeated ServiceResponse service = 1;
+}
+
+// The information of a single service used by ListServiceResponse to answer
+// list_services request.
+message ServiceResponse {
+  // Full name of a registered service, including its package name.
+  // The format is <package>.<service>
+  // https://github.com/trpc-group/trpc/blob/master/trpc/trpc.proto#L465 package.Service
+  string interface_service_name = 1;
+  // eg: polaris, 123 platform format: trpc.app.server.service.
+  string routing_service_name = 2;
+}
+
+// The error code and error message sent by the server when an error occurs.
+message ErrorResponse {
+  // This field uses the error codes defined in trpc.proto TrpcRetCode.
+  int32 error_code = 1;
+  string error_message = 2;
+}
+

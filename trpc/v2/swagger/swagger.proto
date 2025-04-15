@@ -1,0 +1,24 @@
+syntax = "proto3";
+import "google/protobuf/descriptor.proto";
+package trpc.v2;
+
+option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/v2/swagger";
+option java_package = "com.tencent.trpc.protobuf.ext";
+
+extend google.protobuf.MethodOptions {
+    SwaggerRule swagger = 1156;
+}
+
+// to gen swagger json
+message SwaggerRule {
+    string title = 50103;
+    string method = 50104;
+    string description = 50105;
+    repeated SwaggerParam params = 50106;
+}
+
+message SwaggerParam {
+    string name = 1;
+    bool required = 2;
+    string default = 3;
+}

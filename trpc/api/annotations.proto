@@ -26,6 +26,7 @@ syntax = "proto3";
 package trpc.api;
 
 import "trpc/api/http.proto";
+import "trpc/api/openapiv2.proto";
 import "google/protobuf/descriptor.proto";
 
 option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/api";
@@ -33,4 +34,8 @@ option java_package = "com.tencent.trpc.protobuf.ext";
 
 extend google.protobuf.MethodOptions {
     HttpRule http = 50201;
+}
+
+extend google.protobuf.MessageOptions {
+    Schema openapiv2_schema = 50201;
 }

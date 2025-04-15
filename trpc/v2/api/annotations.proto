@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package trpc.v2.api;
+
+import "trpc/v2/api/http.proto";
+import "google/protobuf/descriptor.proto";
+
+option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/v2/api";
+option java_package = "com.tencent.trpc.protobuf.ext";
+
+extend google.protobuf.MethodOptions {
+    HttpRule http = 1157;
+}
