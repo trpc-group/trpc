@@ -168,6 +168,15 @@ enum TrpcCallType {
 
   // Oneway
   TRPC_ONEWAY_CALL = 1;
+
+  // client stream service, deleted
+  //TRPC_CLIENT_STREAM_CALL = 2;
+
+  // server stream service, deleted
+  //TRPC_SERVER_STREAM_CALL = 3;
+
+  // client and server stream service, deleted 
+  //TRPC_BIDI_STREAM_CALL = 4;
 }
 
 // The message type of the transparent transmission information
@@ -203,7 +212,7 @@ enum TrpcContentEncodeType {
 
   // json
   TRPC_JSON_ENCODE = 2;
-
+  
   // flatbuffer
   TRPC_FLATBUFFER_ENCODE = 3;
 
@@ -214,7 +223,15 @@ enum TrpcContentEncodeType {
   TRPC_XML_ENCODE = 5;
 
   // thrift
+  // Due to historical reasons, the early implementation of thrift used binary encoding
+  // so the thrift here represents thrift-binary."
   TRPC_THRIFT_ENCODE = 6;
+
+    // thrift-compact
+  TRPC_THRIFT_COMPACT_ENCODE = 7;
+
+  // text/xml
+  TRPC_TEXT_XML_ENCODE = 8;
 }
 
 // The compressor type of the body data in the trpc protocol
@@ -248,7 +265,6 @@ enum TrpcCompressType {
   TRPC_LZ4_BLOCK_COMPRESS = 7;
 }
 
-// 框架层接口调用的返回码定义
 // The return code definition of the framework layer interface call
 enum TrpcRetCode {
   // success
@@ -304,28 +320,26 @@ enum TrpcRetCode {
   // 5. ...
 
   // timeout error code
-
   // the request is timed out on the client-side
   TRPC_CLIENT_INVOKE_TIMEOUT_ERR = 101;
   // the request is timed out on the client-side due to the full link timeout
   TRPC_CLIENT_FULL_LINK_TIMEOUT_ERR = 102;
 
   // network or connection error code
-
   // client-side connection error
   TRPC_CLIENT_CONNECT_ERR = 111;
 
   // protocol error code
-
   // client-side encode error
   TRPC_CLIENT_ENCODE_ERR = 121;
+
   // client-side decode error
   TRPC_CLIENT_DECODE_ERR = 122;
 
   // client-side overload/limter error code
-
   // the request is throttled on the client-side
   TRPC_CLIENT_LIMITED_ERR = 123;
+
   // The request is overloaded on the client-side and discarded
   TRPC_CLIENT_OVERLOAD_ERR = 124;
 
@@ -356,12 +370,12 @@ enum TrpcRetCode {
   TRPC_STREAM_SERVER_NETWORK_ERR = 201;
 
   // server-side streaming error code
-
   // stream message exceeds size limit
   TRPC_STREAM_SERVER_MSG_EXCEED_LIMIT_ERR = 211;
 
   // server-side streaming encode error code
   TRPC_STREAM_SERVER_ENCODE_ERR = 221;
+
   // server-side streaming decode error code
   TRPC_STREAM_SERVER_DECODE_ERR = 222;
 
@@ -377,6 +391,9 @@ enum TrpcRetCode {
   TRPC_STREAM_SERVER_READ_EMPTY_ERR = 253;
   TRPC_STREAM_SERVER_READ_TIMEOUT_ERR = 254;
 
+  // server-side streaming timeout error code
+  TRPC_STREAM_SERVER_IDLE_TIMEOUT_ERR = 255;
+
   // error code of the client-side stream
   // mainly divided into several categories:
   // 1. network or connection related,
@@ -384,17 +401,17 @@ enum TrpcRetCode {
   // 3. write stream data related, 
   // 4. read stream data related,
   // 5. ...
-
+  
   // client-side streaming network or connection error code
   TRPC_STREAM_CLIENT_NETWORK_ERR = 301;
 
   // client-side streaming error code
-
   // client-side stream message exceeds size limit
   TRPC_STREAM_CLIENT_MSG_EXCEED_LIMIT_ERR = 311;
 
   // client-side streaming encode error code
   TRPC_STREAM_CLIENT_ENCODE_ERR = 321;
+  
   // client-side streaming decode error code
   TRPC_STREAM_CLIENT_DECODE_ERR = 322;
 
@@ -410,8 +427,12 @@ enum TrpcRetCode {
   TRPC_STREAM_CLIENT_READ_EMPTY_ERR = 353;
   TRPC_STREAM_CLIENT_READ_TIMEOUT_ERR = 354;
 
+  // client streaming timeout error
+  TRPC_STREAM_CLIENT_IDLE_TIMEOUT_ERR = 355;
+
   // unspecified error code(unary)
   TRPC_INVOKE_UNKNOWN_ERR = 999;
+  
   // unspecified error code(stream)
   TRPC_STREAM_UNKNOWN_ERR = 1000;
 }

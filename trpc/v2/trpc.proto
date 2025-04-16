@@ -1,0 +1,518 @@
+// Tencent is pleased to support the open source community by making tRPC available.
+// Copyright (C) 2023 THL A29 Limited, a Tencent company. All rights reserved.
+// If you have downloaded a copy of the tRPC source code from Tencent,
+// please note that tRPC source code is licensed under the Apache 2.0 License,
+// A copy of the Apache 2.0 License is included in this file.
+
+syntax = "proto3";
+
+package trpc.v2;
+
+option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/v2;trpc";
+option java_package = "com.tencent.trpc.proto.standard.common";
+option java_outer_classname = "TRPCProtocol";
+
+// The magic value in the framework protocol header
+enum TrpcMagic {
+  // trpc does not use this value, it is used by the pb tool to generate code
+  TRPC_DEFAULT_NONE = 0x00;
+
+  // trpc protocol uses this magic value by default
+  TRPC_MAGIC_VALUE = 0x930;
+}
+
+// The binary data frame type of the trpc protocol
+// Currently supports two types of binary data frames:
+// 1. Binary data frame type for request-response mode
+// 2. Binary data frame type for streaming mode
+enum TrpcDataFrameType {
+  // Binary data frame type for trpc request-response mode
+  TRPC_UNARY_FRAME = 0x00;
+
+  // Binary data frame type for trpc streaming mode
+  TRPC_STREAM_FRAME = 0x01;
+}
+
+// This type is deleted, replaced by TrpcStreamFrameType below
+// The state of trpc protocol's binary data frame
+// Currently supports the end state of streaming mode binary data frame
+//enum TrpcDataFrameState {
+//  // Does not include any state
+//  TRPC_NO_STATE = 0x00;
+//
+//  // End state in trpc streaming mode
+//  TRPC_STREAM_FINISH = 0x01;
+//}
+
+// The binary data frame type of trpc protocol streaming
+// Currently there are 4 types of streaming frames: INIT/DATA/FEEDBACK/CLOSE, where CLOSE frame does not carry business data
+// INIT frame: FIXHEADER + TrpcStreamInitMeta
+// DATA frame: FIXHEADER + body(business serialized data)
+// FEEDBACK frame: FIXHEADER + TrpcStreamFeedBackMeta (trigger strategy: high/low water level + timer)
+// CLOSE frame: FIXHEADER + TrpcStreamCloseMeta
+// Connection and stream idle timeout recycling mechanism is not considered
+enum TrpcStreamFrameType {
+  // Default value for request-response
+  TRPC_UNARY = 0x00;
+
+  // Streaming INIT frame type
+  TRPC_STREAM_FRAME_INIT = 0x01;
+
+  // Streaming DATA frame type
+  TRPC_STREAM_FRAME_DATA = 0x02;
+
+  // Streaming FEEDBACK frame type
+  TRPC_STREAM_FRAME_FEEDBACK = 0x03;
+
+  // Streaming CLOSE frame type
+  TRPC_STREAM_FRAME_CLOSE = 0x04;
+}
+
+// Definition of flow control frame header message for trpc streaming
+message TrpcStreamInitMeta {
+  // INIT request metadata
+  TrpcStreamInitRequestMeta request_meta = 1;
+
+  // INIT response metadata
+  TrpcStreamInitResponseMeta response_meta = 2;
+
+  // Initial send window size notified by receiver to sender
+  uint32 init_window_size = 3;
+
+  // Serialization type of request data
+  // eg: proto/jce/json, default proto
+  // Specific value corresponds to TrpcContentEncodeType
+  uint32 content_type = 4;
+
+  // Compression method used for request data
+  // eg: gzip/snappy/..., default not used
+  // Specific value corresponds to TrpcCompressType
+  uint32 content_encoding = 5;
+}
+
+// Request metadata definition for trpc streaming INIT header
+message TrpcStreamInitRequestMeta {
+  // Name of the calling service
+  // Standard format in trpc protocol: trpc.application_name.server_name.proto_service_name, 4 segments
+  bytes caller = 1;
+
+  // Routing name of the called service
+  // Standard format in trpc protocol: trpc.application_name.server_name.proto_service_name[.interface_name]
+  // First 4 segments are mandatory, interface is optional
+  bytes callee = 2;
+
+  // Interface name of the called service
+  // Standard format: /package.Service_name/interface_name
+  bytes func = 3;
+
+  // Message type for framework information transparent transmission
+  // Such as tracing, dyeing key, gray, authentication, multi-environment, set name, etc.
+  // Specific value corresponds to TrpcMessageType
+  uint32 message_type = 4;
+
+  // Key-value pairs for framework transparent transmission information, currently divided into two parts:
+  // 1. Information to be transparently transmitted by the framework layer, key names must start with 'trpc-'
+  // 2. Information to be transparently transmitted by the business layer, which can be set by the business itself
+  // Note: Key-value pairs in trans_info will be transparently transmitted through the entire link, please use with caution!
+  map<string, bytes> trans_info = 5;
+};
+
+// Response metadata definition for trpc streaming INIT header
+message TrpcStreamInitResponseMeta {
+  // Error return code at framework layer
+  // Specific value corresponds to TrpcRetCode
+  int32 ret = 1;
+
+  // Call result information description
+  // Used when failed
+  bytes error_msg = 2;
+};
+
+// Definition of flow control frame header metadata for trpc streaming
+message TrpcStreamFeedBackMeta {
+  // Incremented window size
+  uint32 window_size_increment = 1;
+}
+
+// trpc streaming close type
+enum TrpcStreamCloseType {
+  // Normal unidirectional stream close
+  TRPC_STREAM_CLOSE = 0;
+
+  // Abnormal bidirectional stream close
+  TRPC_STREAM_RESET = 1;
+}
+
+// Definition of RESET frame header message for trpc streaming
+message TrpcStreamCloseMeta {
+  // Close type, whether to close one end or all
+  int32 close_type = 1;
+
+  // Close return code
+  // Represents framework layer error
+  int32 ret = 2;
+
+  // Close information description
+  bytes msg = 3;
+
+  // Message type for framework information transparent transmission
+  // Such as tracing, dyeing key, gray, authentication, multi-environment, set name, etc.
+  // Specific value corresponds to TrpcMessageType
+  uint32 message_type = 4;
+
+  // Key-value pairs for framework transparent transmission information, currently divided into two parts:
+  // 1. Information to be transparently transmitted by the framework layer, key names must start with 'trpc-'
+  // 2. Information to be transparently transmitted by the business layer, which can be set by the business itself
+  map<string, bytes> trans_info = 5;
+
+  // Interface error return code
+  // It is recommended to identify success and failure when using, 0 represents success, others represent failure
+  int32 func_ret = 6;
+}
+
+// trpc protocol version
+enum TrpcProtoVersion {
+  // Default version
+  TRPC_PROTO_V1 = 0;
+}
+
+// Call type in trpc protocol
+enum TrpcCallType {
+  // Request-response call, including synchronous and asynchronous
+  TRPC_UNARY_CALL = 0;
+
+  // One-way call
+  TRPC_ONEWAY_CALL = 1;
+
+  // Client streaming request call, deleted
+  //TRPC_CLIENT_STREAM_CALL = 2;
+
+  // Server streaming response, deleted
+  //TRPC_SERVER_STREAM_CALL = 3;
+
+  // Client and server streaming request and response, deleted
+  //TRPC_BIDI_STREAM_CALL = 4;
+}
+
+// Message transparent transmission supported types in trpc protocol
+enum TrpcMessageType {
+  // trpc does not use this value, it is used by the pb tool to generate code
+  TRPC_DEFAULT = 0x00;
+
+  // Dyeing
+  TRPC_DYEING_MESSAGE = 0x01;
+
+  // Tracing
+  TRPC_TRACE_MESSAGE = 0x02;
+
+  // Multi-environment
+  TRPC_MULTI_ENV_MESSAGE = 0x04;
+
+  // Gray
+  TRPC_GRID_MESSAGE = 0x08;
+
+  // Set name
+  TRPC_SETNAME_MESSAGE = 0x10;
+}
+
+// Encoding type of data content in trpc protocol
+// Default uses pb
+// Currently agreed that values in the range 0-127 are framework-standard serialization methods, used by framework
+enum TrpcContentEncodeType {
+  // pb
+  TRPC_PROTO_ENCODE = 0;
+
+  // jce
+  TRPC_JCE_ENCODE = 1;
+
+  // json
+  TRPC_JSON_ENCODE = 2;
+
+  // flatbuffer
+  TRPC_FLATBUFFER_ENCODE = 3;
+
+  // No serialization
+  TRPC_NOOP_ENCODE = 4;
+
+  // xml
+  TRPC_XML_ENCODE = 5;
+
+  // thrift
+  TRPC_THRIFT_ENCODE = 6;
+}
+
+// Compression type of data content in trpc protocol
+// Default uses no compression
+enum TrpcCompressType {
+  // Default no compression
+  TRPC_DEFAULT_COMPRESS = 0;
+
+  // Use gzip
+  TRPC_GZIP_COMPRESS = 1;
+
+  // Use snappy
+  //
+  // Deprecated: It is recommended to use TRPC_SNAPPY_STREAM_COMPRESS/TRPC_SNAPPY_BLOCK_COMPRESS, because currently
+  // trpc-go and trpc-cpp use stream and block modes respectively, which are incompatible, cross-language calls will cause errors
+  TRPC_SNAPPY_COMPRESS = 2;
+
+  // Use zlib
+  TRPC_ZLIB_COMPRESS = 3;
+
+  // Use snappy in stream mode
+  TRPC_SNAPPY_STREAM_COMPRESS = 4;
+
+  // Use snappy in block mode
+  TRPC_SNAPPY_BLOCK_COMPRESS = 5;
+}
+
+// Definition of framework layer interface call return codes
+enum TrpcRetCode {
+  // Call success
+  TRPC_INVOKE_SUCCESS = 0;
+
+  // Server-side error codes
+  // Mainly divided into several categories:
+  // 1. Protocol, 2. Service or func routing, 3. Queue timeout or overload
+  // Others to be added
+
+  // Protocol error codes
+  // Server-side decode error
+  TRPC_SERVER_DECODE_ERR = 1;
+  // Server-side encode error
+  TRPC_SERVER_ENCODE_ERR = 2;
+
+  // Service or func routing error codes
+  // Server does not have corresponding service implementation
+  TRPC_SERVER_NOSERVICE_ERR = 11;
+  // Server does not have corresponding interface implementation
+  TRPC_SERVER_NOFUNC_ERR = 12;
+
+  // Timeout/overload/limiter error codes
+  // Request timed out on server
+  TRPC_SERVER_TIMEOUT_ERR = 21;
+  // Request discarded due to server overload protection
+  // Mainly used in framework's internal overload protection plugin
+  TRPC_SERVER_OVERLOAD_ERR = 22;
+  // Request limited on server
+  // Mainly used in external service governance system plugins or business custom limiter plugins, eg: Polaris limiter
+  TRPC_SERVER_LIMITED_ERR = 23;
+  // Request timed out on server due to full link timeout
+  TRPC_SERVER_FULL_LINK_TIMEOUT_ERR = 24;
+
+  // Server system error
+  TRPC_SERVER_SYSTEM_ERR = 31;
+
+  // Server authentication failure error
+  TRPC_SERVER_AUTH_ERR = 41;
+
+  // Server request parameter automatic validation failure error
+  TRPC_SERVER_VALIDATE_ERR = 51;
+
+  // Client-side error codes
+  // Mainly divided into several categories:
+  // 1. Timeout, 2. Network, 3. Protocol, 4. Routing
+  // Others to be added
+
+  // Timeout error codes
+  // Request timed out on client
+  TRPC_CLIENT_INVOKE_TIMEOUT_ERR = 101;
+  // Request timed out on client due to full link timeout
+  TRPC_CLIENT_FULL_LINK_TIMEOUT_ERR = 102;
+
+  // Network related error codes
+  // Client connection error
+  TRPC_CLIENT_CONNECT_ERR = 111;
+
+  // Protocol related error codes
+  // Client encode error
+  TRPC_CLIENT_ENCODE_ERR = 121;
+  // Client decode error
+  TRPC_CLIENT_DECODE_ERR = 122;
+
+  // Overload protection/limiter related error codes
+  // Request limited on client
+  // Mainly used in external service governance system plugins or business custom limiter plugins, eg: Polaris limiter
+  TRPC_CLIENT_LIMITED_ERR = 123;
+  // Request discarded due to client overload protection
+  // Mainly used in framework's internal overload protection plugin
+  TRPC_CLIENT_OVERLOAD_ERR = 124;
+
+  // Routing related error codes
+  // Client IP routing error
+  TRPC_CLIENT_ROUTER_ERR = 131;
+
+  // Client network error
+  TRPC_CLIENT_NETWORK_ERR = 141;
+
+  // Client response parameter automatic validation failure error
+  TRPC_CLIENT_VALIDATE_ERR = 151;
+
+  // Upstream actively disconnected, early cancellation request error
+  TRPC_CLIENT_CANCELED_ERR = 161;
+
+  // Server-side streaming error codes
+  // Mainly divided into several categories:
+  // 1. Network, 2. Encode/decode, 3. Write, 4. Read
+  // Others to be added
+
+  // Server-side streaming network error, detailed error codes need to be sorted out during implementation
+  TRPC_STREAM_SERVER_NETWORK_ERR = 201;
+
+  // Server-side streaming transmission error, detailed error codes need to be sorted out during implementation
+  // eg: Stream message too large, etc.
+  TRPC_STREAM_SERVER_MSG_EXCEED_LIMIT_ERR = 211;
+
+  // Server-side streaming encode error
+  TRPC_STREAM_SERVER_ENCODE_ERR = 221;
+  // Client-side streaming encode/decode error
+  TRPC_STREAM_SERVER_DECODE_ERR = 222;
+
+  // Server-side streaming write error, detailed error codes need to be sorted out during implementation
+  TRPC_STREAM_SERVER_WRITE_END = 231;
+  TRPC_STREAM_SERVER_WRITE_OVERFLOW_ERR = 232;
+  TRPC_STREAM_SERVER_WRITE_CLOSE_ERR = 233;
+  TRPC_STREAM_SERVER_WRITE_TIMEOUT_ERR = 234;
+
+  // Server-side streaming read error, detailed error codes need to be sorted out during implementation
+  TRPC_STREAM_SERVER_READ_END = 251;
+  TRPC_STREAM_SERVER_READ_CLOSE_ERR = 252;
+  TRPC_STREAM_SERVER_READ_EMPTY_ERR = 253;
+  TRPC_STREAM_SERVER_READ_TIMEOUT_ERR = 254;
+
+  // Client-side streaming error codes
+  // Mainly divided into several categories:
+  // 1. Network, 2. Encode/decode, 3. Write, 4. Read
+  // Others to be added
+
+  // Client-side streaming network error, detailed error codes need to be sorted out during implementation
+  TRPC_STREAM_CLIENT_NETWORK_ERR = 301;
+
+  // Client-side streaming transmission error, detailed error codes need to be sorted out during implementation
+  // eg: Stream message too large, etc.
+  TRPC_STREAM_CLIENT_MSG_EXCEED_LIMIT_ERR = 311;
+
+  // Client-side streaming encode error
+  TRPC_STREAM_CLIENT_ENCODE_ERR = 321;
+  // Client-side streaming encode/decode error
+  TRPC_STREAM_CLIENT_DECODE_ERR = 322;
+
+  // Client-side streaming write error, detailed error codes need to be sorted out during implementation
+  TRPC_STREAM_CLIENT_WRITE_END = 331;
+  TRPC_STREAM_CLIENT_WRITE_OVERFLOW_ERR = 332;
+  TRPC_STREAM_CLIENT_WRITE_CLOSE_ERR = 333;
+  TRPC_STREAM_CLIENT_WRITE_TIMEOUT_ERR = 334;
+
+  // Client-side streaming read error, detailed error codes need to be sorted out during implementation
+  TRPC_STREAM_CLIENT_READ_END = 351;
+  TRPC_STREAM_CLIENT_READ_CLOSE_ERR = 352;
+  TRPC_STREAM_CLIENT_READ_EMPTY_ERR = 353;
+  TRPC_STREAM_CLIENT_READ_TIMEOUT_ERR = 354;
+
+  // Unspecified error
+  TRPC_INVOKE_UNKNOWN_ERR = 999;
+  // Unspecified error
+  TRPC_STREAM_UNKNOWN_ERR = 1000;
+}
+
+// Framework keys already used in trans_info, be careful not to repeat:
+// "trpc-dyeing-key": dyeing key
+
+// Request protocol header
+message RequestProtocol {
+  // Protocol version
+  // Specific value corresponds to TrpcProtoVersion
+  uint32 version = 1;
+
+  // Call type of request
+  // eg: normal call, one-way call
+  // Specific value corresponds to TrpcCallType
+  uint32 call_type = 2;
+
+  // Request unique id
+  uint32 request_id = 3;
+
+  // Request timeout, unit ms
+  uint32 timeout = 4;
+
+  // Name of the calling service
+  // Standard format in trpc protocol: trpc.application_name.server_name.proto_service_name, 4 segments
+  bytes caller = 5;
+
+  // Routing name of the called service
+  // Standard format in trpc protocol: trpc.application_name.server_name.proto_service_name[.interface_name]
+  // First 4 segments are mandatory, interface is optional
+  bytes callee = 6;
+
+  // Interface name of the called service
+  // Standard format: /package.Service_name/interface_name
+  bytes func = 7;
+
+  // Message type for framework information transparent transmission
+  // Such as tracing, dyeing key, gray, authentication, multi-environment, set name, etc.
+  // Specific value corresponds to TrpcMessageType
+  uint32 message_type = 8;
+
+  // Key-value pairs for framework transparent transmission information, currently divided into two parts:
+  // 1. Information to be transparently transmitted by the framework layer, key names must start with 'trpc-'
+  // 2. Information to be transparently transmitted by the business layer, which can be set by the business itself
+  map<string, bytes> trans_info = 9;
+
+  // Serialization type of request data
+  // eg: proto/jce/json, default proto
+  // Specific value corresponds to TrpcContentEncodeType
+  uint32 content_type = 10;
+
+  // Compression method used for request data
+  // eg: gzip/snappy/..., default not used
+  // Specific value corresponds to TrpcCompressType
+  uint32 content_encoding = 11;
+}
+
+// Response protocol header
+message ResponseProtocol {
+  // Protocol version
+  // Specific value corresponds to TrpcProtoVersion
+  uint32 version = 1;
+
+  // Call type of request
+  // eg: normal call, one-way call
+  // Specific value corresponds to TrpcCallType
+  uint32 call_type = 2;
+
+  // Request unique id
+  uint32 request_id = 3;
+
+  // Error return code at framework layer
+  // Specific value corresponds to TrpcRetCode
+  int32 ret = 4;
+
+  // Interface error return code
+  // It is recommended to identify success and failure when using, 0 represents success, others represent failure
+  int32 func_ret = 5;
+
+  // Call result information description
+  // Used when failed
+  bytes error_msg = 6;
+
+  // Message type for framework information transparent transmission
+  // Such as tracing, dyeing key, gray, authentication, multi-environment, set name, etc.
+  // Specific value corresponds to TrpcMessageType
+  uint32 message_type = 7;
+
+  // Key-value pairs for framework transparent transmission information returned,
+  // Currently divided into two parts:
+  // 1. Information transparently transmitted back by the framework layer, key names must start with 'trpc-'
+  // 2. Information transparently transmitted back by the business layer, which can be set by the business itself
+  map<string, bytes> trans_info = 8;
+
+  // Encoding type of response data
+  // eg: proto/jce/json, default proto
+  // Specific value corresponds to TrpcContentEncodeType
+  uint32 content_type = 9;
+
+  // Compression method used for response data
+  // eg: gzip/snappy/..., default not used
+  // Specific value corresponds to TrpcCompressType
+  uint32 content_encoding = 10;
+}
