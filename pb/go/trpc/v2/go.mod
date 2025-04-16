@@ -1,4 +1,4 @@
-module trpc.group/trpc/trpc-protocol/pb/go/trpc
+module trpc.group/trpc/trpc-protocol/pb/go/trpc/v2
 
 go 1.16
 

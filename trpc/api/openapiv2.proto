@@ -1,0 +1,23 @@
+// Tencent is pleased to support the open source community by making tRPC available.
+// Copyright (C) 2023 THL A29 Limited, a Tencent company. All rights reserved.
+// If you have downloaded a copy of the tRPC source code from Tencent,
+// please note that tRPC source code is licensed under the Apache 2.0 License,
+// A copy of the Apache 2.0 License is included in this file.
+
+syntax = "proto3";
+
+package trpc.api;
+
+option go_package = "trpc.group/trpc/trpc-protocol/pb/go/trpc/api";
+option java_package = "com.tencent.trpc.protobuf.ext";
+
+// message option schema
+message Schema {
+    JSONSchema json_schema = 1;
+}
+
+// `JSONSchema` represents properties from JSON SCHEMA taken,and as used, in
+//  the OpenAPI v2 spec.
+message JSONSchema {
+    repeated string required = 1;
+}
