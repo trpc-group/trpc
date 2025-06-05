@@ -16,9 +16,7 @@ trpc_api:
 		./trpc/api/openapiv2.proto 
 
 trpc_reflection:
-	protoc -I$(INCLUDE_GOOGLE_PB_PATH) -I.\
-		--go_out=paths=source_relative:./$(DIR) \
-		./trpc/reflection/reflection.proto
+	trpc create -p ./trpc/reflection/reflection.proto  -o ./$(DIR)/trpc/reflection/ --rpconly --mock=false      
 	cd ./$(DIR)/trpc/reflection && rm -f go.mod go.sum && go mod init trpc.group/trpc/trpc-protocol/$(DIR)/trpc/reflection && go mod edit -go=1.18 && go mod tidy && cd -
 
 trpc_core:
